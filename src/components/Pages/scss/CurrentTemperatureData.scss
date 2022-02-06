@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:wght@100&display=swap');
+
+
+.CurrentTemperatureData{
+    
+    width: fit-content;
+    
+    margin: auto;
+   
+ color: white;  
+ .cityname{
+     margin: 0 ;
+ }
+ 
+.temperture{
+    // margin-top: -1.5rem;
+    // margin-bottom: -1.5rem;
+   margin: -1.5rem 0 -1.5rem 3rem;
+    font-size: 7rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+}
+.min_max_tempertures{
+    
+    display: flex;
+    justify-content: center;
+   
+    margin: auto;
+   
+    
+    .min{
+        margin-right: 1rem;
+    }
+}
