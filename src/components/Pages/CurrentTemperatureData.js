@@ -24,8 +24,8 @@ const CurrentTemperatureData = ({ cityName, lat, lon,forecast }) => {
           </div>
 
           <div className="min_max_tempertures">
-            <div className="min">Min: 10°</div>
-            <div className="max">Max: 35°</div>
+            <div className="min">Min: {Math.round(forecast.daily[0].temp.min)}°</div>
+            <div className="max">Max: {Math.round(forecast.daily[0].temp.max)}°</div>
           </div>
         </div>
       ) : (

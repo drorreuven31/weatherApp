@@ -1,3 +1,5 @@
+
+import './scss/CityForecastPage.scss';
 import PropTypes  from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { getLocationWeatherInfo } from "../../services/weatherAPI";
@@ -20,7 +22,7 @@ const CityForecastPage = ({cityinfo}) => {
 
 
 
-  return <div>
+  return <div className='page'>
       Hey, This is the Forecast for {name}
       <CurrentTemperatureData cityName={name} lat={lat} lon={lon} forecast={forecast} />
   </div>;
