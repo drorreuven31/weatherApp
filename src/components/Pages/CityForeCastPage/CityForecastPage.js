@@ -2,7 +2,7 @@
 import './scss/CityForecastPage.scss';
 import PropTypes  from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { getLocationWeatherInfo } from "../../services/weatherAPI";
+import { getLocationWeatherInfo } from "../../../services/weatherAPI";
 import CurrentTemperatureData from './CurrentTemperatureData';
 
 
@@ -16,7 +16,9 @@ const CityForecastPage = ({cityinfo}) => {
       setForecast(await getLocationWeatherInfo(lat, lon));
       console.log(forecast);
     }
-    fetchWeatherInfo();
+    if(lat && lon)
+      fetchWeatherInfo();
+      
     return () => {};
   }, [lat, lon]);
 
@@ -24,7 +26,7 @@ const CityForecastPage = ({cityinfo}) => {
 
   return <div className='page'>
       Hey, This is the Forecast for {name}
-      <CurrentTemperatureData cityName={name} lat={lat} lon={lon} forecast={forecast} />
+      {forecast && <CurrentTemperatureData cityName={name} lat={lat} lon={lon} forecast={forecast} />}
   </div>;
 };
 

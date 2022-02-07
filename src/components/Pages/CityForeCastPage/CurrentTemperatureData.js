@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import "./scss/CurrentTemperatureData.scss";
 
-import { UpperCaseFirstLettersSentence } from "../../services/util";
+import { UpperCaseFirstLettersSentence } from "../../../services/util";
 
 const CurrentTemperatureData = ({ cityName, lat, lon,forecast }) => {
   
