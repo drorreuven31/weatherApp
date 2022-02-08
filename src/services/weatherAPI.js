@@ -1,5 +1,6 @@
 import { OPEN_WEATHER_API_KEY } from "./keys";
 import axios from "axios";
+import { Buffer } from 'buffer'
 const ONE_CALL_BASEURL =
   "https://api.openweathermap.org/data/2.5";
 
@@ -17,3 +18,8 @@ export  async function getLocationWeatherInfo(lat, lon) {
     console.log(res.data);
     return res.data;
   }
+
+
+
+
+

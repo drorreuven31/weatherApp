@@ -16,11 +16,11 @@ const CurrentTemperatureData = ({ cityName, lat, lon,forecast }) => {
             <div className="temperture">
               {Math.round(forecast.current.temp)}°
             </div>
-            <h2 className="short_desctiption">
+            <h3 className="short_desctiption">
               {UpperCaseFirstLettersSentence(
                 forecast.current.weather[0].description
               )}
-            </h2>
+            </h3>
           </div>
 
           <div className="min_max_tempertures">

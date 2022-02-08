@@ -67,7 +67,7 @@ function City(){
   let { city } = useParams();
 
   return (
-    <div>
+    <div style={{backgroundColor:'red'}}>
       <h3>City: {city}</h3>
     </div>
   );

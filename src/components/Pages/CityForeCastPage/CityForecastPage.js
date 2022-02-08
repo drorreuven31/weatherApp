@@ -4,6 +4,7 @@ import PropTypes  from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { getLocationWeatherInfo } from "../../../services/weatherAPI";
 import CurrentTemperatureData from './CurrentTemperatureData';
+import HourlyForecast from './HourlyForecast/HourlyForecast';
 
 
 const CityForecastPage = ({cityinfo}) => {
@@ -24,10 +25,24 @@ const CityForecastPage = ({cityinfo}) => {
 
 
 
-  return <div className='page'>
-      Hey, This is the Forecast for {name}
-      {forecast && <CurrentTemperatureData cityName={name} lat={lat} lon={lon} forecast={forecast} />}
-  </div>;
+  return (
+    <div className='page'>
+      {forecast && (
+        <>
+          <CurrentTemperatureData
+            cityName={name}
+            lat={lat}
+            lon={lon}
+            forecast={forecast}
+          />
+          <HourlyForecast
+            current={forecast.current}
+            hourly={forecast.hourly.slice(0,25)}
+          />
+        </>
+      )}
+    </div>
+  )
 };
 
 
