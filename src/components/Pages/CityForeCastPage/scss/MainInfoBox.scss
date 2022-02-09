@@ -1,0 +1,23 @@
+ $text-align-direction:left;
+ 
+ .info_box{
+padding: .5rem;
+ margin: 3rem auto 0 auto;
+ width: 85%;
+ background-color:#187bcd ;
+ border-radius: .5rem;
+
+.box_description{
+ height: 20%;
+ text-align:$text-align-direction ;
+}
+
+ hr{
+  margin: .5rem;
+  border: none;
+  height: 1px;
+  color: #f5f5f5;
+  background-color: #f5f5f5;
+ }
+}
+

@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './scss/HourlyForecast.scss'
+//import '../scss/infoboxcss.scss';
 import HourData from './HourData';
-import ScrollContainer from 'react-indiana-drag-scroll'
 
+import { useHorizontalScroll } from '../../../../hooks/useHorizontalScroll'
+import MainInfoBox from '../MainInfoBox';
 
 
 
@@ -12,30 +14,24 @@ const HourlyForecast =({current,hourly})=> {
     let date = new Date(unix * 1000);
     return date;
   }
-
-
+const scrollRef = useHorizontalScroll()
 
   return (
-    <div className='HourlyForecast'>
-      <h6 className='long_description'>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit vdg gsafg gagf
-        geagf.
-      </h6>
-      <hr />
-
-      <div className='houres_container'>
-        {hourly.map((h,index) => {
+    <MainInfoBox boxDescription=
+    'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi maxime ullam '>
+      <div className='houres_container' ref={scrollRef}>
+        {hourly.map((h, index) => {
           return (
             <HourData
               key={h.dt}
-              hour={index!=0?unixToDateTime(h.dt).getHours():"Now"}
+              hour={index !== 0 ? unixToDateTime(h.dt).getHours() : 'Now'}
               temp={Math.round(h.temp)}
               icon={h.weather[0].icon}
             />
           )
         })}
       </div>
-    </div>
+    </MainInfoBox>
   )
 }
 
@@ -43,7 +39,7 @@ HourlyForecast.propTypes = {
   current: PropTypes.object.isRequired,
   hourly: PropTypes.array.isRequired,
 }
-
+//
 export default HourlyForecast;
 
 

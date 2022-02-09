@@ -1,48 +1,11 @@
-$text-align-direction:left;
 
 
-.HourlyForecast{
- padding: .5rem;
- margin: 3rem auto 0 auto;
- width: 85%;
- background-color:#187bcd ;
- border-radius: .5rem;
-
-
- hr{
-  margin: .5rem;
- }
-}
-.long_description{
- height: 25%;
- text-align:$text-align-direction ;
-}
 .houres_container{
  height: 80%;
  display: flex;
  flex-direction: row;
- overflow-x: scroll;
+ overflow-x: hidden;
  overflow-y: hidden;
 
-::-webkit-scrollbar {
-    height: 12px;
-  
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888; 
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-}
-
-   
 
 }
