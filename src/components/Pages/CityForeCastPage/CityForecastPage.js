@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { getLocationWeatherInfo } from "../../../services/weatherAPI";
 import CurrentTemperatureData from './CurrentTemperatureData';
 import HourlyForecast from './HourlyForecast/HourlyForecast';
+import SevenDaysForecast from './SevenDaysForecast/SevenDaysForecast'
 
 
 const CityForecastPage = ({cityinfo}) => {
@@ -15,7 +16,7 @@ const CityForecastPage = ({cityinfo}) => {
   useEffect(() => {
     async function fetchWeatherInfo() {
       setForecast(await getLocationWeatherInfo(lat, lon));
-      console.log(forecast);
+      
     }
     if(lat && lon)
       fetchWeatherInfo();
@@ -37,8 +38,9 @@ const CityForecastPage = ({cityinfo}) => {
           />
           <HourlyForecast
             current={forecast.current}
-            hourly={forecast.hourly.slice(0,25)}
+            hourly={forecast.hourly.slice(0, 25)}
           />
+          <SevenDaysForecast />
         </>
       )}
     </div>

@@ -1,10 +1,11 @@
  $text-align-direction:left;
+ $box-color:#187bcd ;
  
  .info_box{
 padding: .5rem;
- margin: 3rem auto 0 auto;
+ margin: 1rem auto 0 auto;
  width: 85%;
- background-color:#187bcd ;
+ background-color:$box-color;
  border-radius: .5rem;
 
 .box_description{

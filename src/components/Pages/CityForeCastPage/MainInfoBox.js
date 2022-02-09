@@ -1,3 +1,5 @@
+// This is a wrapper component for main info box (full size)
+
 import React from 'react'
 import PropTypes from 'prop-types'
 

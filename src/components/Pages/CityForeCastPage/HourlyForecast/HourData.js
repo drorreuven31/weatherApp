@@ -17,7 +17,7 @@ const HourData = ({hour,temp,icon}) => {
 
 HourData.propTypes = {
  temp:PropTypes.number.isRequired,
- hour:PropTypes.number.isRequired,
+ hour:PropTypes.string.isRequired,
  icon:PropTypes.string.isRequired,
 };
 

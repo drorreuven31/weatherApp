@@ -17,21 +17,26 @@ const HourlyForecast =({current,hourly})=> {
 const scrollRef = useHorizontalScroll()
 
   return (
-    <MainInfoBox boxDescription=
-    'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi maxime ullam '>
-      <div className='houres_container' ref={scrollRef}>
-        {hourly.map((h, index) => {
-          return (
-            <HourData
-              key={h.dt}
-              hour={index !== 0 ? unixToDateTime(h.dt).getHours() : 'Now'}
-              temp={Math.round(h.temp)}
-              icon={h.weather[0].icon}
-            />
-          )
-        })}
-      </div>
-    </MainInfoBox>
+    <div className='HourlyForecast'>
+      <MainInfoBox boxDescription='Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi maxime ullam '>
+        <div className='houres_container' ref={scrollRef}>
+          {hourly.map((h, index) => {
+            return (
+              <HourData
+                key={h.dt}
+                hour={
+                  index !== 0
+                    ? unixToDateTime(h.dt).getHours().toString()
+                    : 'Now'
+                }
+                temp={Math.round(h.temp)}
+                icon={h.weather[0].icon}
+              />
+            )
+          })}
+        </div>
+      </MainInfoBox>
+    </div>
   )
 }
 
