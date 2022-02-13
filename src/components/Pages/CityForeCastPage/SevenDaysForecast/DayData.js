@@ -5,6 +5,7 @@ import './scss/DayData.scss'
 
 const DayData = ({ dayOfWeek, minTemp,maxTemp,icon }) => {
   return (
+   <>
     <div className='DayData'>
       <div className='dayName'>{dayOfWeek}</div>
       <div className='dayIcon'>
@@ -17,6 +18,8 @@ const DayData = ({ dayOfWeek, minTemp,maxTemp,icon }) => {
       <div className='dayMinTemp'>{minTemp}°</div>
       <div className='dayMaxTemp'>{maxTemp}°</div>
     </div>
+    <hr className='divider'/>
+    </>
   )
 }
 

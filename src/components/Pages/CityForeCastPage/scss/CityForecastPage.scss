@@ -6,15 +6,21 @@
 
 
 .page{
-    background-color: lightblue;
     background-image: url("../../../../resources/backgrounds/Clouds.jpg");
     background-repeat: repeat-x ;
+    background-attachment: fixed;
+    background-size: cover;
     animation: animatedBackground 300s linear alternate infinite;
     color: white;  
-    //opacity: 0.8;
-    height: 100%;
-    
-
+    padding-top: 2rem;
+   /*
+    h1{
+      font-size: 4em;
+    }
+    h6{
+      font-size: 1.5em;
+    }
+    */
 }
 
 
