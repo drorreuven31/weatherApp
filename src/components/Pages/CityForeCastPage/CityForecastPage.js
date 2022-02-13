@@ -40,7 +40,7 @@ const CityForecastPage = ({cityinfo}) => {
             current={forecast.current}
             hourly={forecast.hourly.slice(0, 25)}
           />
-          <SevenDaysForecast />
+          <SevenDaysForecast daily={forecast.daily}/>
         </>
       )}
     </div>

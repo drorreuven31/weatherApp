@@ -7,7 +7,7 @@ import './scss/MainInfoBox.scss'
 const MainInfoBox = (props) => {
   return (
     <div className='info_box'>
-      <h6 className='box_description'>{props.boxDescription}</h6>
+      <div className='box_description'>{props.boxDescription}</div>
       <hr className='divider' />
       {props.children}
     </div>
@@ -15,7 +15,7 @@ const MainInfoBox = (props) => {
 }
 
 MainInfoBox.propTypes = {
- boxDescription:PropTypes.string.isRequired
+ boxDescription:PropTypes.object.isRequired
 }
 
 export default MainInfoBox;

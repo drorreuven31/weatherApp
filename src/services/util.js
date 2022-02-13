@@ -5,3 +5,9 @@ export function UpperCaseFirstLettersSentence(str){
         })
         .join(' ');
 }
+export function unixToDateTime(unix){
+  let date = new Date(unix * 1000)
+  return date
+}
+
+export const weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];

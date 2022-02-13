@@ -9,6 +9,8 @@ padding: .5rem;
  border-radius: .5rem;
 
 .box_description{
+ display: flex;
+ justify-content: left;
  height: 20%;
  text-align:$text-align-direction ;
 }
