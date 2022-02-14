@@ -50,7 +50,7 @@ console.log('render! ',columnNumber)
             hourly={forecast.hourly.slice(0, 25)}
           />
           <SevenDaysForecast daily={forecast.daily} />
-
+         
           <div className='smallBoxesContainer'>
             {fillChunkedList(_.chunk(SmallDataBoxes, columnNumber)).map(
               (row,i) => {
@@ -74,10 +74,12 @@ function fillChunkedList(list) {
   let chunck = list[0].length
   let last = list.length - 1
   if (list[last].length !== chunck) {
-    for (let i = 0; i < chunck - list[last].length; i++) {
+    let divsToAdd =list[last].length
+    console.log('divs to add: ',divsToAdd)
+    for (let i = 0; i < chunck -divsToAdd ; i++) {
       list[last].push(
         <div
-        key={i}
+          key={i}
           style={{
             margin: '1rem',
             width: '100%',
