@@ -5,7 +5,6 @@ import DayData from './DayData'
 import _ from 'lodash';
 import { unixToDateTime, weekdays } from '../../../../services/util'
 const SevenDaysForecast = (props) => {
-  console.log(props.daily)
   return (
     <div className='SevenDaysForeCast'>
       <MainInfoBox

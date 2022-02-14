@@ -1,0 +1,18 @@
+$text-align-direction:left;
+ $box-color:#187bcd ;
+ 
+ .small_info_box{
+  margin: 1rem;
+  width: 100%;
+ background-color:$box-color;
+ border-radius: .5rem;
+ aspect-ratio: 1/1;
+  
+
+ .small_box_description{
+ display: flex;
+ 
+ //justify-content: $text-align-direction;
+ text-align:$text-align-direction ;
+}
+ }

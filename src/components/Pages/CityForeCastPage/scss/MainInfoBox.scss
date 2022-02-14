@@ -10,7 +10,7 @@ padding: .5rem;
 
 .box_description{
  display: flex;
- justify-content: left;
+ justify-content: $text-align-direction;
  height: 20%;
  text-align:$text-align-direction ;
 }

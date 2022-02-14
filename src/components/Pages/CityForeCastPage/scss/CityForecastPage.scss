@@ -21,6 +21,16 @@
       font-size: 1.5em;
     }
     */
+
+ .smallBoxesContainer{
+  display: flex;
+  flex-direction: column;
+}
+.boxesRow{
+  display: flex;
+  flex-direction: row;
+}
+
 }
 
 
