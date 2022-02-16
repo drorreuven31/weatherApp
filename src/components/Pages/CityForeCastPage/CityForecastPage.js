@@ -25,14 +25,24 @@ const CityForecastPage = ({ cityinfo }) => {
     return () => {}
   }, [lat, lon])
   
+  console.log(forecast)
   
-console.log('render! ',columnNumber)
-  const SmallDataBoxes = [
-    <SmallInfoBox boxDescription={<h6>Wind</h6>} />,
-    <SmallInfoBox boxDescription={<h6>Wind</h6>} />,
-    <SmallInfoBox boxDescription={<h6>Wind</h6>} />,
-    <SmallInfoBox boxDescription={<h6>Wind</h6>} />,
-    <SmallInfoBox boxDescription={<h6>Wind</h6>} />,
+  const createSmallDataBoxes = () => [
+    <SmallInfoBox boxDescription={<h6>Wind</h6>}>
+      {forecast.current.wind_speed} Km/h
+    </SmallInfoBox>,
+    <SmallInfoBox boxDescription={<h6>Feels Like</h6>}>
+      {Math.round(forecast.current.feels_like)}°
+    </SmallInfoBox>,
+    <SmallInfoBox boxDescription={<h6>UV Index</h6>}>
+      {forecast.current.uvi}
+    </SmallInfoBox>,
+    <SmallInfoBox boxDescription={<h6>Visibility</h6>}>
+      {Math.round(forecast.current.visibility / 1000)} Km
+    </SmallInfoBox>,
+    <SmallInfoBox boxDescription={<h6>Humidity</h6>}>
+      {forecast.current.humidity}%
+    </SmallInfoBox>,
   ]
 
   return (
@@ -47,14 +57,19 @@ console.log('render! ',columnNumber)
           />
           <HourlyForecast
             current={forecast.current}
-            hourly={forecast.hourly.slice(0, 25)}
+            hourly={forecast.hourly.slice(0, 23)}
+            daily={forecast.daily}
           />
           <SevenDaysForecast daily={forecast.daily} />
-         
+
           <div className='smallBoxesContainer'>
-            {fillChunkedList(_.chunk(SmallDataBoxes, columnNumber)).map(
-              (row,i) => {
-                return <div key={i} className='boxesRow'>{row}</div>
+            {fillChunkedList(_.chunk(createSmallDataBoxes(), columnNumber)).map(
+              (row, i) => {
+                return (
+                  <div key={i} className='boxesRow'>
+                    {row}
+                  </div>
+                )
               }
             )}
           </div>

@@ -5,7 +5,9 @@ const SmallInfoBox = props => {
   return (
     <div className='small_info_box'>
       <div className='small_box_description'>{props.boxDescription}</div>
+      <div className="box_content">
       {props.children}
+      </div>
     </div>
   )
 }

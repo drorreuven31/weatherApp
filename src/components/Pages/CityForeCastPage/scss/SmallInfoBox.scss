@@ -1,18 +1,29 @@
-$text-align-direction:left;
- $box-color:#187bcd ;
- 
- .small_info_box{
+$text-align-direction: left;
+$box-color: #187bcd;
+
+.small_info_box {
+  padding: 1rem;
   margin: 1rem;
   width: 100%;
- background-color:$box-color;
- border-radius: .5rem;
- aspect-ratio: 1/1;
+  background-color: $box-color;
+  border-radius: 0.5rem;
+  aspect-ratio: 1/1;
   
-
- .small_box_description{
- display: flex;
- 
- //justify-content: $text-align-direction;
- text-align:$text-align-direction ;
+  .box_content{
+   font-size: 1.8rem;
+   position: relative;
+  top: 40%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
- }
+
+  .small_box_description {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #bdbdbdbd;
+    //justify-content: $text-align-direction;
+    text-align: $text-align-direction;
+  }
+}
