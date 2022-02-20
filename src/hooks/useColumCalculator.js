@@ -18,6 +18,7 @@ export default function useColumCalculator(startColumns=2) {
      
       let newColumnNumber = Math.floor(getWindowDimensions().width/250);
       if (columnNumber !== newColumnNumber){
+        console.log(newColumnNumber);
         setcolumnNumber(newColumnNumber)
       }
       

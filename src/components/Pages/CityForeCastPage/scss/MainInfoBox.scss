@@ -1,18 +1,19 @@
  $text-align-direction:left;
- $box-color:#187bcd ;
+ $box-color:#187bcd70 ;
  
  .info_box{
 padding: .5rem;
  margin: 1rem auto 0 auto;
- width: 85%;
+ //background-color:rgba(0,0,0,.5);
  background-color:$box-color;
  border-radius: .5rem;
-
+ 
 .box_description{
  display: flex;
  justify-content: $text-align-direction;
  height: 20%;
  text-align:$text-align-direction ;
+ align-items: center;
 }
 
  hr{

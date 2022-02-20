@@ -10,7 +10,7 @@ const DayData = ({ dayOfWeek, minTemp,maxTemp,icon }) => {
       <div className='dayName'>{dayOfWeek}</div>
       <div className='dayIcon'>
         <img
-          className='weatherIcon'
+          className='dayweatherIcon'
           src={`https://openweathermap.org/img/wn/${icon}@${4}x.png`}
           alt='icons'
         />

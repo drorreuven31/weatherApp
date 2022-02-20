@@ -9,6 +9,14 @@ import SmallInfoBox from './SmallInfoBox'
 import useColumCalculator from '../../../hooks/useColumCalculator'
 import _ from 'lodash'
 
+//icons
+import AirIcon from '@mui/icons-material/Air';
+import TempIcon from '@mui/icons-material/Thermostat';
+import UvIcon from '@mui/icons-material/LightMode';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import HumidityIcon from '@mui/icons-material/Water';
+import PressureIcon from '@mui/icons-material/Speed';
+
 const CityForecastPage = ({ cityinfo }) => {
   const { name, local_names, lat, lon, country, state } = cityinfo
 
@@ -28,27 +36,30 @@ const CityForecastPage = ({ cityinfo }) => {
   console.log(forecast)
   
   const createSmallDataBoxes = () => [
-    <SmallInfoBox boxDescription={<h6>Wind</h6>}>
+    <SmallInfoBox boxDescription={<><AirIcon style={{marginRight:".3rem"}}/> <h6>Wind</h6></>}>
       {forecast.current.wind_speed} Km/h
     </SmallInfoBox>,
-    <SmallInfoBox boxDescription={<h6>Feels Like</h6>}>
+    <SmallInfoBox boxDescription={<><TempIcon style={{marginRight:".3rem"}}/> <h6>Feels Like</h6></>}>
       {Math.round(forecast.current.feels_like)}°
     </SmallInfoBox>,
-    <SmallInfoBox boxDescription={<h6>UV Index</h6>}>
+    <SmallInfoBox boxDescription={<><UvIcon style={{marginRight:".3rem"}}/> <h6>UV Index</h6></>}>
       {forecast.current.uvi}
     </SmallInfoBox>,
-    <SmallInfoBox boxDescription={<h6>Visibility</h6>}>
+    <SmallInfoBox boxDescription={<><VisibilityIcon style={{marginRight:".3rem"}}/> <h6>Visibility</h6></>}>
       {Math.round(forecast.current.visibility / 1000)} Km
     </SmallInfoBox>,
-    <SmallInfoBox boxDescription={<h6>Humidity</h6>}>
+    <SmallInfoBox boxDescription={<><HumidityIcon style={{marginRight:".3rem"}}/> <h6>Humidity</h6></>}>
       {forecast.current.humidity}%
     </SmallInfoBox>,
+    <SmallInfoBox boxDescription={<><PressureIcon style={{marginRight:".3rem"}}/> <h6>Pressure</h6></>}>
+    {forecast.current.pressure} Mb
+  </SmallInfoBox>,
   ]
 
   return (
-    <div className='page'>
+    <div className='pagewrapper'>
       {forecast && (
-        <>
+        <div className='page'>
           <CurrentTemperatureData
             cityName={name}
             lat={lat}
@@ -73,7 +84,7 @@ const CityForecastPage = ({ cityinfo }) => {
               }
             )}
           </div>
-        </>
+        </div>
       )}
     </div>
   )

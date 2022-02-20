@@ -4,12 +4,16 @@ import MainInfoBox from '../MainInfoBox'
 import DayData from './DayData'
 import _ from 'lodash';
 import { unixToDateTime, weekdays } from '../../../../services/util'
+
+import WeekIcon from '@mui/icons-material/DateRange';
+
 const SevenDaysForecast = (props) => {
   return (
     <div className='SevenDaysForeCast'>
       <MainInfoBox
         boxDescription={
           <>
+          <WeekIcon style={{marginRight:".3rem"}}/>
             <h6>7-DAYS FORECAST</h6>
           </>
         }

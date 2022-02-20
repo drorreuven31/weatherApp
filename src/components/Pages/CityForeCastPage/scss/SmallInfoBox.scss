@@ -1,16 +1,15 @@
 $text-align-direction: left;
-$box-color: #187bcd;
+$box-color:#187bcd70 ;
 
 .small_info_box {
   padding: 1rem;
-  margin: 1rem;
+  margin: .5rem;
   width: 100%;
   background-color: $box-color;
-  border-radius: 0.5rem;
+  border-radius: 2rem;
   aspect-ratio: 1/1;
-  
   .box_content{
-   font-size: 1.8rem;
+   font-size: 4vw;
    position: relative;
   top: 40%;
   -ms-transform: translateY(-50%);

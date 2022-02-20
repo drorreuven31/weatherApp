@@ -12,6 +12,7 @@ import _ from 'lodash'
 import { ReactComponent as SunrizeIcon } from '../../../../resources/icons/sunrise.svg';
 import { ReactComponent as SunsetIcon } from '../../../../resources/icons/sunset.svg';
 
+import Hour from '@mui/icons-material/QueryBuilder';
 
 const HourlyForecast = ({ current, hourly,daily }) => {
   const scrollRef = useHorizontalScroll()
@@ -20,12 +21,12 @@ const HourlyForecast = ({ current, hourly,daily }) => {
   const sunStateObjects=()=>{
 
     let relevant_sunrise_day = Date.now() > current.sunrise ? 1 : 0
-    let relevant_sunset_day = Date.now() > current.sunset ? 0 : 1
+    let relevant_sunset_day = Date.now() > current.sunset ? 1 : 0
     const sunrize = 
     {
       dt:daily[relevant_sunrise_day].sunrise,
       hour:dateFormat(unixToDateTime(daily[relevant_sunrise_day].sunrise),"HH:MM"),
-      icon:<SunrizeIcon/>,
+      icon:<SunrizeIcon className='weathersvgIcon'/>,
       temp:'Sunrise',
       isSunState:true
     }
@@ -34,7 +35,7 @@ const HourlyForecast = ({ current, hourly,daily }) => {
     {
       dt:daily[relevant_sunset_day].sunset,
       hour:dateFormat(unixToDateTime(daily[relevant_sunset_day].sunset),"HH:MM"),
-      icon:<SunsetIcon/>,
+      icon:<SunsetIcon className='weathersvgIcon'/>,
       temp:'Sunset',
       isSunState:true
     }
@@ -85,10 +86,12 @@ const CreateObjectsList =()=>{
     <div className='HourlyForecast'>
       <MainInfoBox
         boxDescription={
+          <>
+          <Hour style={{marginRight:".3rem"}}/>
           <h6>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi
-            maxime ullam
+            HOURLY FORECAST
           </h6>
+          </>
         }
       >
         <div className='houres_container' ref={scrollRef}>

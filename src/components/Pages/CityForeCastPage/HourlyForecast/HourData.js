@@ -9,15 +9,17 @@ const HourData = ({ hour, temp, icon, isSunState }) => {
       <div className="hour">{hour}</div>
         
       {isSunState
-      ?
-      <div className="weatherIcon">
-        {icon}  
-      </div>
+      ?(
+       
+        icon
+       
+      )
       :
-      <img
+        <img
         className="weatherIcon"
         src={`https://openweathermap.org/img/wn/${icon}@${4}x.png`}
       />
+      
       }
       <div className="temp">
         {temp}
@@ -28,9 +30,12 @@ const HourData = ({ hour, temp, icon, isSunState }) => {
 };
 
 HourData.propTypes = {
-  temp: PropTypes.string.isRequired,
+  temp:  PropTypes.string,
   hour: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
   isSunState: PropTypes.bool,
 };
 

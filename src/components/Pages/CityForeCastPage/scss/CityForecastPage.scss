@@ -4,15 +4,20 @@
   100% { background-position: 0 0; }
 }
 
+.pagewrapper{
+  background-image: url("../../../../resources/backgrounds/Clouds.jpg");
+  background-repeat: repeat-x ;
+  background-attachment: fixed;
+  //background-size: cover;
+  animation: animatedBackground 300s linear alternate infinite;
+  color: white;  
+}
 
 .page{
-    background-image: url("../../../../resources/backgrounds/Clouds.jpg");
-    background-repeat: repeat-x ;
-    background-attachment: fixed;
-    //background-size: cover;
-    animation: animatedBackground 300s linear alternate infinite;
-    color: white;  
+    width: 85%;
     padding-top: 2rem;
+    margin: auto;
+    //width: 80%;
    /*
     h1{
       font-size: 4em;
