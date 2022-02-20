@@ -7,32 +7,81 @@ import { useHorizontalScroll } from '../../../../hooks/useHorizontalScroll'
 import MainInfoBox from '../MainInfoBox'
 import { unixToDateTime } from '../../../../services/util'
 
+import dateFormat from 'dateformat'
+import _ from 'lodash'
+import { ReactComponent as SunrizeIcon } from '../../../../resources/icons/sunrise.svg';
+import { ReactComponent as SunsetIcon } from '../../../../resources/icons/sunset.svg';
+
+
 const HourlyForecast = ({ current, hourly,daily }) => {
   const scrollRef = useHorizontalScroll()
-  const [hoursList, sethoursList] = useState(hourly);
-  //add sunrize and sunset
-  useEffect(() => {
-    if(hoursList && daily && current){
+  const [hoursObjects,sethoursObjects] = useState(hourly);
+ 
+  const sunStateObjects=()=>{
 
-    let relevant_day = Date.now() > current.sunset ? 0 : 1
-    const sunrizeObject = {
-      dt: daily[relevant_day].sunrise,
-      hour: unixToDateTime(daily[relevant_day].sunrise),
-      icon: 'src/resources/icons/sunrise.svg',
-      temp: 'Sunrise',
-      isSunState: true,
+    let relevant_sunrise_day = Date.now() > current.sunrise ? 1 : 0
+    let relevant_sunset_day = Date.now() > current.sunset ? 0 : 1
+    const sunrize = 
+    {
+      dt:daily[relevant_sunrise_day].sunrise,
+      hour:dateFormat(unixToDateTime(daily[relevant_sunrise_day].sunrise),"HH:MM"),
+      icon:<SunrizeIcon/>,
+      temp:'Sunrise',
+      isSunState:true
     }
-    const sunsetObject = {
-      dt: daily[relevant_day].sunset,
-      hour: unixToDateTime(daily[relevant_day].sunrise),
-      icon: 'src/resources/icons/sunset.svg',
-      temp: 'Sunset',
-      isSunState: true,
+      
+    const sunset = 
+    {
+      dt:daily[relevant_sunset_day].sunset,
+      hour:dateFormat(unixToDateTime(daily[relevant_sunset_day].sunset),"HH:MM"),
+      icon:<SunsetIcon/>,
+      temp:'Sunset',
+      isSunState:true
     }
-    sethoursList([...hoursList, sunrizeObject, sunsetObject]) 
-  }}, [current, hourly,daily])
+    return([sunrize,sunset]);
+    
+  }
 
-  return (current && hourly&& daily)&&(
+const CreateObjectsList =()=>{
+  let hours=hoursObjects.concat(sunStateObjects());
+
+  hours.sort((a, b) => a.dt-b.dt);
+  return hours;
+}
+
+  const hourComponents=()=>{
+   return CreateObjectsList()
+    .map((h, index) => {
+      return (
+        
+        !h.isSunState?
+        <HourData
+          key={h.dt}
+          hour={
+            index !== 0
+              ? unixToDateTime(h.dt).getHours().toString()
+              : 'Now'
+          }
+          temp={Math.round(h.temp)+""}
+          icon={h.weather[0].icon}//problem here
+        />:
+        <HourData
+          key={h.dt}
+          hour={
+            h.hour
+          }
+          temp={h.temp}
+          icon={h.icon}
+          isSunState={true}
+        />
+      )
+    })
+  }
+
+  
+
+
+  return (hoursObjects)&&(
     <div className='HourlyForecast'>
       <MainInfoBox
         boxDescription={
@@ -43,22 +92,7 @@ const HourlyForecast = ({ current, hourly,daily }) => {
         }
       >
         <div className='houres_container' ref={scrollRef}>
-          {hoursList
-            .sort((x) => x.dt)
-            .map((h, index) => {
-              return (
-                <HourData
-                  key={h.dt}
-                  hour={
-                    index !== 0
-                      ? unixToDateTime(h.dt).getHours().toString()
-                      : 'Now'
-                  }
-                  temp={Math.round(h.temp)}
-                  icon={h.weather[0].icon}//problem here
-                />
-              )
-            })}
+          {hourComponents()}
         </div>
       </MainInfoBox>
     </div>
