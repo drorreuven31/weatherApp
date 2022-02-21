@@ -30,8 +30,11 @@ const TempRangeBar = ({min,max,isToday}) => {
 
 
         let roundedTemp= Math.round(CurrentTempurture.temp);
-        let marginLeft = ((((roundedTemp-min)/(max-min))*100)-(dotHeight*100/gradientWidth))+"%"
-        return marginLeft;
+        let marginLeft = ((((roundedTemp-min)/(max-min))*100)-(dotHeight*100/gradientWidth))
+        if(marginLeft<0)
+            marginLeft=0
+
+        return marginLeft+"%";
     }
 
 

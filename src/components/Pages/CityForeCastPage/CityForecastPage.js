@@ -34,7 +34,12 @@ const CityForecastPage = ({ cityinfo }) => {
     }
     if (lat && lon) fetchWeatherInfo()
 
-    return () => {}
+    const interval = setInterval(() => {
+      fetchWeatherInfo()
+    }, 20*1000);
+
+    return () => clearInterval(interval);
+    
   }, [lat, lon])
   
   
