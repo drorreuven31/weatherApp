@@ -5,9 +5,10 @@
 }
 
 .pagewrapper{
-  background-image: url("../../../../resources/backgrounds/Clouds.jpg");
-  background-repeat: repeat-x ;
-  background-attachment: fixed;
+  //background-color: lightblue;
+  //background-image: url("../../../../resources/backgrounds/Clouds.jpg");
+  //background-repeat: repeat-x ;
+  //background-attachment: fixed;
   //background-size: cover;
   animation: animatedBackground 300s linear alternate infinite;
   color: white;  
@@ -30,10 +31,9 @@
  .smallBoxesContainer{
   display: flex;
   flex-direction: column;
- 
+  margin-top: 1rem;
 }
 .boxesRow{
-  margin-top: 1rem;
   display: flex;
   flex-direction: row;
 }

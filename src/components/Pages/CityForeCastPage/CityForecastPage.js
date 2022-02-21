@@ -22,7 +22,7 @@ export const CurrentTempertureContext = React.createContext();
 
 
 const CityForecastPage = ({ cityinfo }) => {
-  const { name, local_names, lat, lon, country, state } = cityinfo
+  const { name, local_names, lat, lon} = cityinfo
 
   const [forecast, setForecast] = useState(null)
   const columnNumber = useColumCalculator()
@@ -37,7 +37,6 @@ const CityForecastPage = ({ cityinfo }) => {
     return () => {}
   }, [lat, lon])
   
-  console.log(forecast)
   
   const createSmallDataBoxes = () => [
     <SmallInfoBox boxDescription={<><AirIcon style={{marginRight:".3rem"}}/> <h6>Wind</h6></>}>
@@ -59,9 +58,13 @@ const CityForecastPage = ({ cityinfo }) => {
     {forecast.current.pressure} Mb
   </SmallInfoBox>,
   ]
+  
+  const getPageBg=()=>{
+    return require('../../../resources/backgrounds/Clouds.jpg')
+  }
 
   return (
-    <div className='pagewrapper'>
+    <div className='pagewrapper' style={{backgroundImage:`url(${getPageBg()})`}}>
       {forecast && (
         <div className='page'>
           <CurrentTemperatureData
@@ -110,7 +113,7 @@ function fillChunkedList(list) {
     for (let i = 0; i < chunck -divsToAdd ; i++) {
       list[last].push(
         <div
-          key={i*1000}
+          key={Math.random()*1000}
           style={{
             margin: '1rem',
             width: '100%',

@@ -3,17 +3,19 @@ import { BrowserRouter, Route, Routes , useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CityForecastPage from './components/Pages/CityForeCastPage/CityForecastPage';
 import {getCityNamebyCords} from "./services/locationAPI";
+import SwipeableViews from "react-swipeable-views";
 
 //gets a method to update the current location state
 const UpdateUsersLocation = async (
   setCurrentLocation,
   setToDefault = false
 ) => {
+  const HolonCoords=[32.0193121, 34.7804076];
 
-const HolonInfo = await getCityNamebyCords(32.0193121, 34.7804076);
 
   if (setToDefault) {
-    setCurrentLocation(HolonInfo);
+    
+    setCurrentLocation(await getCityNamebyCords(...HolonCoords));
     return;
   }
 
@@ -25,7 +27,7 @@ const HolonInfo = await getCityNamebyCords(32.0193121, 34.7804076);
     setCurrentLocation(locationinfo);
   
   },(err)=>{
-    setCurrentLocation(HolonInfo);
+    setCurrentLocation( getCityNamebyCords(...HolonCoords));
   });
   
 };
@@ -54,7 +56,13 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<CityForecastPage cityinfo={currentLocation} />}
+            element={
+              <SwipeableViews enableMouseEvents>
+              
+                <CityForecastPage cityinfo={currentLocation} />
+                <CityForecastPage cityinfo={currentLocation} />
+
+              </SwipeableViews>}
           />
           <Route path="/forecast/:city" element={<City/>} />
         </Routes>

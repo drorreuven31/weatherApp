@@ -19,10 +19,11 @@ $box-color:#187bcd70 ;
 
   .small_box_description {
     display: flex;
+    flex-direction: row;
     align-items: center;
     font-size: 1.2rem;
     color: #bdbdbdbd;
-    //justify-content: $text-align-direction;
-    text-align: $text-align-direction;
+    justify-content: $text-align-direction;
+    //text-align: $text-align-direction;
   }
 }
