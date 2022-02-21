@@ -2,8 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './scss/DayData.scss'
 
+import TempRangeBar from './TempRangeBar'
+
 
 const DayData = ({ dayOfWeek, minTemp,maxTemp,icon }) => {
+  
+ 
   return (
    <>
     <div className='DayData'>
@@ -16,6 +20,7 @@ const DayData = ({ dayOfWeek, minTemp,maxTemp,icon }) => {
         />
       </div>
       <div className='dayMinTemp'>{minTemp}°</div>
+      <TempRangeBar min={minTemp} max={maxTemp} />
       <div className='dayMaxTemp'>{maxTemp}°</div>
     </div>
     <hr className='divider'/>

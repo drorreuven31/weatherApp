@@ -20,8 +20,10 @@ const HourlyForecast = ({ current, hourly,daily }) => {
  
   const sunStateObjects=()=>{
 
-    let relevant_sunrise_day = Date.now() > current.sunrise ? 1 : 0
-    let relevant_sunset_day = Date.now() > current.sunset ? 1 : 0
+    let dt = Date.now()/1000;
+    let relevant_sunrise_day = dt > current.sunrise ? 1 : 0
+    let relevant_sunset_day = dt > current.sunset ? 1 : 0
+   
     const sunrize = 
     {
       dt:daily[relevant_sunrise_day].sunrise,
@@ -47,6 +49,7 @@ const CreateObjectsList =()=>{
   let hours=hoursObjects.concat(sunStateObjects());
 
   hours.sort((a, b) => a.dt-b.dt);
+ 
   return hours;
 }
 
@@ -64,7 +67,7 @@ const CreateObjectsList =()=>{
               : 'Now'
           }
           temp={Math.round(h.temp)+""}
-          icon={h.weather[0].icon}//problem here
+          icon={h.weather[0].icon}
         />:
         <HourData
           key={h.dt}
