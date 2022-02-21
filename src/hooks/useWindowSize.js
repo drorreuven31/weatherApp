@@ -8,23 +8,19 @@ function getWindowDimensions() {
   };
 }
 
-export default function useColumCalculator(startColumns=2) {
+export default function useWindowSize() {
   
-  const [columnNumber, setcolumnNumber] = useState(
-    Math.floor(getWindowDimensions().width / 220)
+  const [windowSize, setWindowSize] = useState(
+    getWindowDimensions()
   )
   useEffect(() => {
     function handleResize() {
-     
-      let newColumnNumber = Math.floor(getWindowDimensions().width/250);
-      if (columnNumber !== newColumnNumber){
-        setcolumnNumber(newColumnNumber)
-      }
+        setWindowSize(getWindowDimensions());
       
     }
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  return columnNumber
+  return windowSize;
 }

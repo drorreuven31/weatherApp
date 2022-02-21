@@ -17,6 +17,10 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import HumidityIcon from '@mui/icons-material/Water';
 import PressureIcon from '@mui/icons-material/Speed';
 
+
+export const CurrentTempertureContext = React.createContext();
+
+
 const CityForecastPage = ({ cityinfo }) => {
   const { name, local_names, lat, lon, country, state } = cityinfo
 
@@ -71,8 +75,9 @@ const CityForecastPage = ({ cityinfo }) => {
             hourly={forecast.hourly.slice(0, 23)}
             daily={forecast.daily}
           />
+          <CurrentTempertureContext.Provider value={forecast.current} >
           <SevenDaysForecast daily={forecast.daily} />
-
+          </CurrentTempertureContext.Provider>
           <div className='smallBoxesContainer'>
             {fillChunkedList(_.chunk(createSmallDataBoxes(), columnNumber)).map(
               (row, i) => {
@@ -105,7 +110,7 @@ function fillChunkedList(list) {
     for (let i = 0; i < chunck -divsToAdd ; i++) {
       list[last].push(
         <div
-          key={i}
+          key={i*1000}
           style={{
             margin: '1rem',
             width: '100%',

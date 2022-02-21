@@ -30,8 +30,10 @@
  .smallBoxesContainer{
   display: flex;
   flex-direction: column;
+ 
 }
 .boxesRow{
+  margin-top: 1rem;
   display: flex;
   flex-direction: row;
 }

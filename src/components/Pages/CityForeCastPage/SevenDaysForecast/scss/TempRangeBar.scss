@@ -1,7 +1,8 @@
 .TempRangeBar{
     display: flex;
     height: 100%;
-    aspect-ratio: 5/1;
+    width: 30vw;
+  
     align-items: center;
 .bar{
     height: 20%;
@@ -16,6 +17,14 @@
 .gradient{
     border-radius: .5rem;
 height: 100%;
-background-image: linear-gradient(to right, red , yellow);
+display: flex;
+align-items: center;
+
+.dot {
+    height: 80%;
+    aspect-ratio: 1/1;
+    background-color: white;
+    border-radius: 50%;
+  }
 }
 }

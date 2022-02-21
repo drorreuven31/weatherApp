@@ -47,6 +47,7 @@ const SevenDaysForecast = (props) => {
                   icon={_day.weather[0].icon}
                   minTemp={Math.round(_day.temp.min)}
                   maxTemp={Math.round(_day.temp.max)}
+                  isToday={index == 0?true:false}
                 />
               );
             })}
