@@ -1,0 +1,20 @@
+.header-content{
+    
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .icon{
+        color: white;
+    }
+}
+header{
+    //background-color: black;
+    height: 7vh;
+    width: 100%;
+    //margin-top: 7vh;
+    position: fixed;
+    top:0;
+    z-index: 10000;
+}
