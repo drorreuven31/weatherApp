@@ -6,6 +6,7 @@ import {getCityNamebyCords} from "./services/locationAPI";
 import SwipeableViews from "react-swipeable-views";
 import AllCitiesWrapper from "./components/Pages/CityForeCastPage/AllCitiesWrapper";
 import { useReadMyCities } from "./hooks/useReadMyCities";
+import MyCitiesPage from "./components/Pages/MyCitiesPage/MyCitiesPage";
 
 //gets a method to update the current location state
 
@@ -59,40 +60,13 @@ function App() {
             path="/"
             element= {<>{currentLocation&&<AllCitiesWrapper currentLocationInfo={currentLocation}/>}</>}
           />
-          <Route path="/forecast/:city" element={<City/>} />
-          <Route path="/myCities" element={<MyCities/>} />
+        
+          <Route path="/myCities" element={<MyCitiesPage/>} />
         </Routes>
       </BrowserRouter>
     </div>
   );
 }
-
-
-
-
-
-
-function City(){
-  let { city } = useParams();
-
-  return (
-    <div style={{backgroundColor:'red'}}>
-      <h3>City: {city}</h3>
-    </div>
-  );
-}
-function MyCities(){
-  const citiies = useReadMyCities();
-
-  return (
-    <div >
-      {citiies.map(c=>{
-        return <h1 key={c.lat}>{c.name}</h1>
-      })}
-    </div>
-  );
-}
-
 
 
 export default App;

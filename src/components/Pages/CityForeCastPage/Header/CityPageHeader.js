@@ -18,7 +18,7 @@ const CityPageHeader = (props) => {
           <ListIcon />
         </IconButton>
 
-        <LangButton/>
+        <LangButton  />
         </div>
       </header>
     
