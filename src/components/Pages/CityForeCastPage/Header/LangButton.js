@@ -2,13 +2,13 @@ import * as React from "react";
 import LanguageIcon from "@mui/icons-material/Language";
 import IconButton from "@mui/material/IconButton";
 import {useDispatch,useSelector } from 'react-redux'
-import { changeLang } from "../../../../services/redux/langSlice";
+import { changeLang } from "../../../../services/redux/settingsSlice";
 import DropDownButton from '../../../../components/DropDownButton'
 export default function LangButton() {
   
   const dispatch = useDispatch()
 
-  const lang = useSelector((state) => state.lang.value)
+  const lang = useSelector((state) => state.settings.lang)
 
   function changeLanguage(lang) {
       dispatch(changeLang(lang));

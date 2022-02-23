@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import langReducer from './langSlice'
+import settingsReducer from './settingsSlice'
+import citiesListReducer from './citiesListSlice'
 
 export default configureStore({
   reducer: {
-      lang:langReducer
+      settings:settingsReducer,
+      cities:citiesListReducer
   },
 })

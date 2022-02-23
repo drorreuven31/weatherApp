@@ -28,7 +28,7 @@ const CityForecastPage = ({ cityinfo }) => {
 
   const [forecast, setForecast] = useState(null)
   const columnNumber = useColumCalculator()
-  const lang = useSelector((state) => state.lang.value)
+  const lang = useSelector((state) => state.settings.lang )
 
 
   async function fetchWeatherInfo() {

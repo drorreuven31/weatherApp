@@ -29,7 +29,7 @@ return allCities;
     <>
       <CityPageHeader/>
       
-       <SwipeableViews enableMouseEvents > 
+       <SwipeableViews enableMouseEvents  index={1}> 
          
           {citiesComponents()}
         
@@ -39,7 +39,8 @@ return allCities;
 };
 
 AllCitiesWrapper.propTypes = {
-    currentLocationInfo:PropTypes.object.isRequired
+    currentLocationInfo:PropTypes.object.isRequired,
+    startOn:PropTypes.number
 };
 
 export default AllCitiesWrapper;

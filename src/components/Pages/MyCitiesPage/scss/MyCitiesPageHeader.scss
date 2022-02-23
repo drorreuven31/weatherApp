@@ -20,6 +20,7 @@
     width: 100%;
     border-radius: 0.4rem;
     z-index: 0;
+    align-items: center;
     input {
       color: white;
       background-color: transparent;
@@ -28,6 +29,17 @@
       outline-width: 0;
       margin-left: .5rem;
     }
+
+    button.cancel-btn {
+        display: none;
+        color: white;
+        padding: 0;
+        .MuiSvgIcon-root{
+            color: white;
+        }
+    }
+    
+
   }
 
   h2 {
