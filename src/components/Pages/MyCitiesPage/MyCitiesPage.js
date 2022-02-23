@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import { useReadMyCities } from "../../../hooks/useReadMyCities";
 import { MyCitiesPageHeader } from "./MyCitiesPageHeader";
 import CityInspect from "./CityInspect";
-import SwipeOptions from "react-swipe-options/SwipeOptions";
 import { Delete } from "@mui/icons-material";
+
 
 const MyCitiesPage = (props) => {
   const citiesInfo = useReadMyCities();
@@ -19,9 +19,9 @@ const MyCitiesPage = (props) => {
           <div className="city-inspect-list">
             {citiesInfo.map((c) => {
               return (
-                <SwipeOptions left={[<Delete />]}>
+
                   <CityInspect key={c.lat} {...c} />
-                </SwipeOptions>
+                
               );
             })}
           </div>

@@ -5,7 +5,7 @@ import { getLocationWeatherInfo } from "../../../services/weatherAPI";
 import { useSelector } from "react-redux";
 import dateFormat from "dateformat";
 import { unixToDateTime } from "../../../services/util";
-import SwipeOptions from "react-swipe-options/SwipeOptions";
+
 
 const CityInspect = ({ lat, lon, local_names }) => {
   const [forecast, setforecast] = useState();

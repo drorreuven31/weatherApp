@@ -7,6 +7,21 @@
         color: white;
         margin-right: 1rem;
     }
+.tabs{
+    .MuiButtonBase-root{
+        padding: 0;
+        color: darkgray;
+    }
+    .MuiIcon-root{
+        
+        font-size: small;
+    }
+    .selected-tab{
+        color: white;
+    }
+}
+
+background-color: #187bcd;
 }
 header{
     height: 7vh;

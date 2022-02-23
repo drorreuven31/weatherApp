@@ -12,44 +12,7 @@ import MyCitiesPage from "./components/Pages/MyCitiesPage/MyCitiesPage";
 
 
 function App() {
-  const [currentLocation, setCurrentLocation] = useState();
- 
-  useEffect(() => {
-    async function UpdateLocation(setToDefault = false) {
-      if (setToDefault) await UpdateUsersLocation(true);
-      //set to default - Holon
-      else 
-        await UpdateUsersLocation();
-    }
-    UpdateLocation(!("geolocation" in navigator));
-
-  }, []);
-
-  const UpdateUsersLocation = async (
-    setToDefault = false
-  ) => {
-    const HolonCoords=[32.0193121, 34.7804076];
   
-  
-    if (setToDefault) {
-      
-      setCurrentLocation(await getCityNamebyCords(...HolonCoords));
-      return;
-    }
-  
-    // for real location
-    navigator.geolocation.getCurrentPosition(async (position) => {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
-      const locationinfo = await getCityNamebyCords(lat, lon);
-      
-      setCurrentLocation(locationinfo);
-    
-    },(err)=>{
-      setCurrentLocation( getCityNamebyCords(...HolonCoords));
-    });
-    
-  };
 
   return (
     <div className="App">
@@ -58,7 +21,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element= {<>{currentLocation&&<AllCitiesWrapper currentLocationInfo={currentLocation}/>}</>}
+            element= {<AllCitiesWrapper startOn={0}/>}
           />
         
           <Route path="/myCities" element={<MyCitiesPage/>} />

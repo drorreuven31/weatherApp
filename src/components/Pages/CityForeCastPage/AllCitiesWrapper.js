@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import SwipeableViews from "react-swipeable-views";
@@ -8,15 +8,22 @@ import CityPageHeader from "./Header/CityPageHeader";
 
 const AllCitiesWrapper = (props) => {
   const citiesInfo = useReadMyCities();
+  const [cityIndex, setcityIndex] = useState(props.startOn)
+  
+
+  useEffect(() => {
+    setcityIndex(props.startOn);
+}, [props.startOn])
+
 
 const citiesComponents =()=>{
    
-    let allCities =[ <CityForecastPage cityinfo={props.currentLocationInfo} key={0}/> ];
+    let allCities =[ ];
     
     if(citiesInfo){
     const cities =citiesInfo.map((city,i)=>{
         return(
-          <CityForecastPage cityinfo={city} key={i+1}/>
+          <CityForecastPage cityinfo={city} key={i}/>
         )
     })
     allCities= allCities.concat(cities);
@@ -27,9 +34,9 @@ return allCities;
 
   return (
     <>
-      <CityPageHeader/>
+      <CityPageHeader locationsNumber={citiesInfo.length} index={cityIndex} changeIndex={setcityIndex}/>
       
-       <SwipeableViews enableMouseEvents  index={1}> 
+       <SwipeableViews enableMouseEvents  index={cityIndex} onChangeIndex={setcityIndex}> 
          
           {citiesComponents()}
         
@@ -39,7 +46,6 @@ return allCities;
 };
 
 AllCitiesWrapper.propTypes = {
-    currentLocationInfo:PropTypes.object.isRequired,
     startOn:PropTypes.number
 };
 
