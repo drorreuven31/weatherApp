@@ -7,10 +7,11 @@ import dateFormat from "dateformat";
 import { unixToDateTime } from "../../../services/util";
 
 
-const CityInspect = ({ lat, lon, local_names }) => {
+const CityInspect = ({ lat, lon, local_names,isMyLocation,onClick }) => {
   const [forecast, setforecast] = useState();
 
   const lang = useSelector((state) => state.settings.lang);
+
   useEffect(() => {
     async function fetchForecast() {
       setforecast(await getLocationWeatherInfo(lat, lon));
@@ -23,10 +24,19 @@ const CityInspect = ({ lat, lon, local_names }) => {
     <>
     {forecast&&(
 
-    <div className="CityInspect">
+    <div className="CityInspect" onClick={onClick}>
       <div className="left-section">
-        <h4 className="city-name">{local_names[lang]}</h4>
-        <div className="city-time">{dateFormat(unixToDateTime(forecast.current.dt),"HH:MM")}</div>
+        <h4 className="city-name">{
+          isMyLocation?'My Location':local_names[lang]
+        }</h4>
+        <div className="city-time">{
+          isMyLocation
+          ?
+          local_names[lang]
+          :
+          dateFormat(unixToDateTime(forecast.current.dt),"HH:MM")
+        
+        }</div>
         <div className="weather-description">{forecast.current.weather[0].description}</div>
       </div>
       
@@ -46,6 +56,8 @@ CityInspect.propTypes = {
   lat: PropTypes.number.isRequired,
   lon: PropTypes.number.isRequired,
   local_names: PropTypes.object.isRequired,
+  isMyLocation: PropTypes.bool,
+  onClick:PropTypes.func.isRequired,
 };
 
 export default CityInspect;

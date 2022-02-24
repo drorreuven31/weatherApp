@@ -23,12 +23,21 @@ function App() {
             path="/"
             element= {<AllCitiesWrapper startOn={0}/>}
           />
-        
+         <Route
+            path="/city/:index"
+            element= {<HandleCityIndex/>}
+          />
           <Route path="/myCities" element={<MyCitiesPage/>} />
         </Routes>
       </BrowserRouter>
     </div>
   );
+}
+
+
+function HandleCityIndex(){
+  const {index} = useParams();
+  return <AllCitiesWrapper startOn={parseInt(index)}/>
 }
 
 

@@ -5,11 +5,13 @@ import { useReadMyCities } from "../../../hooks/useReadMyCities";
 import { MyCitiesPageHeader } from "./MyCitiesPageHeader";
 import CityInspect from "./CityInspect";
 import { Delete } from "@mui/icons-material";
+import { useNavigate  } from "react-router-dom";
+
 
 
 const MyCitiesPage = (props) => {
   const citiesInfo = useReadMyCities();
-
+    const navigate = useNavigate();
   return (
     <div className="page-wrapper">
       <MyCitiesPageHeader />
@@ -17,10 +19,10 @@ const MyCitiesPage = (props) => {
       <div className="MyCitiesPage">
         {citiesInfo && (
           <div className="city-inspect-list">
-            {citiesInfo.map((c) => {
+            {citiesInfo.map((c,i) => {
               return (
 
-                  <CityInspect key={c.lat} {...c} />
+                  <CityInspect key={c.lat} {...c} onClick={() => navigate(`/city/${i}`)}/>
                 
               );
             })}

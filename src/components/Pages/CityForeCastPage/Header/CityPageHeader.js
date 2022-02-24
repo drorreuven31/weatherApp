@@ -20,7 +20,7 @@ const CityPageHeader = (props) => {
           
          {Array(props.locationsNumber).fill(0).map((_, i) => {
            return(
-           <IconButton key={i+1} value={i+1} className={i==props.index&&'selected-tab'} onClick={()=>props.changeIndex(i)}>
+           <IconButton key={i+1} value={i+1} className={i==props.index?'selected-tab':''} onClick={()=>props.changeIndex(i)}>
              {i==0? 
              <NavigationIcon sx={{fontSize:'1rem'}}/>
              :

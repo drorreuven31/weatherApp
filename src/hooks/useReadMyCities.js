@@ -7,54 +7,64 @@ import { setCities } from "../services/redux/citiesListSlice";
 
 export function useReadMyCities() {
     const dispath = useDispatch()
-    //const [myCitiesInfo, setmyCitiesInfo] = useState([]);
+    const [currentLocation, setCurrentLocation] = useState([]);
     const cities = useSelector(state=>state.cities.list)
-    const [currentLocation, setCurrentLocation] = useState();
+    
     //on mount , if the cities list state is empty bring it from the cookies
     useEffect(() => {
-        async function setCities(){
-            const cookie_cities =[await getUserLocation()];
-            cookie_cities.push(readMyCitiesFromCookies());
+      console.log('hey')
+        async function asyncSetCities(){
+          if(currentLocation.length!==0){
+            let loc = await getCityNamebyCords(...currentLocation)
+            loc.isMyLocation=true;
+            let cookie_cities =[loc];
+            cookie_cities=cookie_cities.concat(readMyCitiesFromCookies());
+           // debugger;
             dispath(setCities(cookie_cities));
+          }
         }
-
-
-        if(cities.length===0){
-            setCities()
-    }
+       
+          if(cities.length===0&&currentLocation.length>0){
+            asyncSetCities()
+          }
+    
         
         // cookie.save('my_cities',cities,{path:'/'});
          
        
-    }, [])
+    }, [currentLocation])
       
+    // setting up te currentLocation
+    useEffect(() => {
+      setUserLocation();
+    }, [])
+    
+
+
     const readMyCitiesFromCookies = () => {
      return cookie.load("my_cities");
     };
 
     
 
-  const getUserLocation = async () => {
+  const setUserLocation = () => {
     const HolonCoords=[32.0193121, 34.7804076];
   
   
     if (!("geolocation" in navigator)) {
-        const locationinfo = await getCityNamebyCords(...HolonCoords);
-        return locationinfo;
+        setCurrentLocation(HolonCoords)
     }
-    
+    else{
+
     // for real location
-    navigator.geolocation.getCurrentPosition(async (position) => {
+    navigator.geolocation.getCurrentPosition( position => {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
-      const locationinfo = await getCityNamebyCords(lat, lon);
-      
-      return locationinfo;
+      setCurrentLocation([lat,lon])
     
-    });
-    
-  };
-
+    })
+    }
+  }
 
 
 
