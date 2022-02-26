@@ -17,7 +17,7 @@ export function useReadMyCities() {
           if(currentLocation.length!==0){
             let loc = await getCityNamebyCords(...currentLocation)
             loc.isMyLocation=true;
-            let cookie_cities =[loc];
+            let cookie_cities =[loc,{name:"Milano",lat:45.477576, lon:9.233362,local_names:{en:"Milano",he:'מילאנו'}}];
             cookie_cities=cookie_cities.concat(readMyCitiesFromCookies());
            // debugger;
             dispath(setCities(cookie_cities));

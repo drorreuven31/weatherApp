@@ -5,6 +5,7 @@ import { getLocationWeatherInfo } from "../../../services/weatherAPI";
 import { useSelector } from "react-redux";
 import dateFormat from "dateformat";
 import { unixToDateTime } from "../../../services/util";
+import { getThemeData, getWeatherTime } from "../../../services/themes";
 
 
 const CityInspect = ({ lat, lon, local_names,isMyLocation,onClick }) => {
@@ -19,12 +20,17 @@ const CityInspect = ({ lat, lon, local_names,isMyLocation,onClick }) => {
     if (lat && lon) fetchForecast();
   }, [lat, lon]);
 
+  const getPageBg=()=>{
+    const bgImage= getThemeData(forecast.current.weather[0].main,getWeatherTime(forecast.current.weather[0].icon)).bgImage;
+    
+    return bgImage;
+  }
 
   return (
     <>
     {forecast&&(
 
-    <div className="CityInspect" onClick={onClick}>
+    <div className="CityInspect" onClick={onClick} style={{backgroundImage:`url(${getPageBg()})`}}>
       <div className="left-section">
         <h4 className="city-name">{
           isMyLocation?'My Location':local_names[lang]

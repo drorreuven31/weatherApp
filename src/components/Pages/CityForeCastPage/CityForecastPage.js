@@ -1,6 +1,6 @@
 import './scss/CityForecastPage.scss'
 import PropTypes from 'prop-types'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { getLocationWeatherInfo } from '../../../services/weatherAPI'
 import CurrentTemperatureData from './CurrentTemperatureData'
 import HourlyForecast from './HourlyForecast/HourlyForecast'
@@ -18,18 +18,20 @@ import HumidityIcon from '@mui/icons-material/Water';
 import PressureIcon from '@mui/icons-material/Speed';
 import CityPageHeader from './Header/CityPageHeader'
 import { useSelector } from 'react-redux'
+import { getThemeData, getWeatherTime } from '../../../services/themes'
+import { ThemeContext } from './AllCitiesWrapper'
 
 
 export const CurrentTempertureContext = React.createContext();
 
 
-const CityForecastPage = ({ cityinfo }) => {
+const CityForecastPage = ({ cityinfo,cityIndex ,currentIndex}) => {
   const { name, local_names, lat, lon} = cityinfo
 
   const [forecast, setForecast] = useState(null)
   const columnNumber = useColumCalculator()
   const lang = useSelector((state) => state.settings.lang )
-
+  const {setTheme} = useContext(ThemeContext);
 
   async function fetchWeatherInfo() {
     const _forcast = await getLocationWeatherInfo(lat, lon);
@@ -56,6 +58,16 @@ const CityForecastPage = ({ cityinfo }) => {
     }
   }, [])
   
+  //for updating theme
+  useEffect(() => {
+    if(forecast){
+    if(currentIndex==cityIndex)
+      setTheme({theme:forecast.current.weather[0].main,time:getWeatherTime(forecast.current.weather[0].icon)});
+    }
+
+  }, [currentIndex,cityIndex,forecast])
+  
+  
 
 
 
@@ -81,13 +93,14 @@ const CityForecastPage = ({ cityinfo }) => {
   ]
   
   const getPageBg=()=>{
-    return require('../../../resources/backgrounds/Clouds.jpg')
+    return getThemeData(forecast.current.weather[0].main,"day").bgImage;
   }
 
   return (
+    <>
+      {forecast && (
     <div className='pagewrapper' style={{backgroundImage:`url(${getPageBg()})`}}>
       
-      {forecast && (
         <div className='page'>
           <CurrentTemperatureData
             cityName={local_names[lang]}
@@ -115,13 +128,17 @@ const CityForecastPage = ({ cityinfo }) => {
             )}
           </div>
         </div>
-      )}
     </div>
+      )}
+    </>
   )
 }
 
 CityForecastPage.propTypes = {
   cityinfo: PropTypes.object.isRequired,
+  cityIndex:PropTypes.number.isRequired,
+  currentIndex:PropTypes.number.isRequired
+  
 }
 
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import IconButton from "@mui/material/IconButton";
 
@@ -9,10 +9,15 @@ import { Link } from "react-router-dom";
 import { Tab, Tabs } from "@mui/material";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import NavigationIcon from '@mui/icons-material/Navigation';
+import { ThemeContext } from "../AllCitiesWrapper";
+import { getThemeData } from "../../../../services/themes";
+import useTheme from "../../../../hooks/useTheme";
 const CityPageHeader = (props) => {
+  const {bg} = useTheme();
+
   return (
     <header>
-      <div className="header-content">
+      <div className="header-content" style={{backgroundColor:bg}}>
         <IconButton className="icon" component={Link} to={"/myCities"}>
           <ListIcon />
         </IconButton>

@@ -1,12 +1,22 @@
+@keyframes animatedBackground {
+  0% { background-position: 0 0; }
+  50% {background-position: 100% 0;}
+  100% { background-position: 0 0; }
+}
+
+
 .CityInspect {
- 
+  background-repeat: repeat-x ;
+  width: 100%;
+  background-size: cover;
+  animation: animatedBackground 300s linear alternate infinite;
   text-align: left;
   padding: 0.5rem 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   height: 12vh;
-  background-color: lightblue;
+  
   border-radius: 1rem;
   margin-bottom: 0.5rem;
   cursor: pointer;
