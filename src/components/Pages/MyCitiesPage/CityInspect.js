@@ -24,7 +24,6 @@ console.log(forecast)
 
   const getPageBg=()=>{
     const bgImage= getThemeData(forecast.current.weather[0].main,getWeatherTime(forecast.current.weather[0].icon)).bgImage;
-    
     return bgImage;
   }
 

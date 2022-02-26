@@ -8,8 +8,8 @@ export const themes = [
       "bgHex": "#187bcd"
     },
     "night": {
-      "bgImage": "",
-      "bgHex": ""
+      "bgImage": require('../resources/backgrounds/Clear.jpg'),
+      "bgHex": "#187bcd"
     }
   },
   {
@@ -19,8 +19,8 @@ export const themes = [
       "bgHex": "#636363"
     },
     "night": {
-      "bgImage": "",
-      "bgHex": ""
+      "bgImage": require('../resources/backgrounds/DarkClouds.jpg'),
+      "bgHex": "#636363"
     }
   },
 ]
