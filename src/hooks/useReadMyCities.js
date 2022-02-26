@@ -12,7 +12,6 @@ export function useReadMyCities() {
     
     //on mount , if the cities list state is empty bring it from the cookies
     useEffect(() => {
-      console.log('hey')
         async function asyncSetCities(){
           if(currentLocation.length!==0){
             let loc = await getCityNamebyCords(...currentLocation)

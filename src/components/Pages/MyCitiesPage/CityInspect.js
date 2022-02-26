@@ -10,6 +10,8 @@ import { getThemeData, getWeatherTime } from "../../../services/themes";
 
 const CityInspect = ({ lat, lon, local_names,isMyLocation,onClick }) => {
   const [forecast, setforecast] = useState();
+console.log(forecast)
+
 
   const lang = useSelector((state) => state.settings.lang);
 
@@ -26,6 +28,12 @@ const CityInspect = ({ lat, lon, local_names,isMyLocation,onClick }) => {
     return bgImage;
   }
 
+  function calcLocalTime(){
+    let offset=new Date().getTimezoneOffset()*60
+    const time = forecast.current.dt+forecast.timezone_offset+offset
+    return time;
+  }
+
   return (
     <>
     {forecast&&(
@@ -40,7 +48,7 @@ const CityInspect = ({ lat, lon, local_names,isMyLocation,onClick }) => {
           ?
           local_names[lang]
           :
-          dateFormat(unixToDateTime(forecast.current.dt),"HH:MM")
+          dateFormat(unixToDateTime(calcLocalTime()),"HH:MM")
         
         }</div>
         <div className="weather-description">{forecast.current.weather[0].description}</div>
