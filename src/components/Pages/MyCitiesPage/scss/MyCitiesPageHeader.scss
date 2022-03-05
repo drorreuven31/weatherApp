@@ -1,6 +1,6 @@
 .my-cities-header {
   width: 80%;
-
+  background-color: #0E1111;
   height: 20vh;
   position: fixed;
   top: 0;
@@ -30,17 +30,35 @@
       margin-left: .5rem;
     }
 
-    button.cancel-btn {
-        display: none;
+    button.clear-btn {
+      
         color: white;
         padding: 0;
         .MuiSvgIcon-root{
             color: white;
         }
     }
-    
-
+   
   }
+
+  .search-bar-line-container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    button.cancel-btn {
+      font-size: 1.1rem;
+      margin: 0 1rem 0 1rem;
+      background-color: transparent;
+      border: none;
+      color: white;
+      padding: 0;
+      cursor: pointer;
+    }
+    
+  }
+
+
 
   h2 {
     align-self: start;

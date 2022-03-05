@@ -14,6 +14,7 @@ export const ThemeContext = createContext({
 
 const AllCitiesWrapper = (props) => {
   const citiesInfo = useReadMyCities();
+  //debugger;
   const [currentCityIndex, setcurrentCityIndex] = useState(props.startOn)
   const [theme, setTheme] = useState({theme:'Clear',time:"day"})
 
@@ -37,8 +38,8 @@ return cities;
 }
 
   return (
-    
-    <ThemeContext.Provider value={{theme,setTheme}}>
+    <>
+    {citiesInfo&&(<ThemeContext.Provider value={{theme,setTheme}}>
       <CityPageHeader locationsNumber={citiesInfo.length} index={currentCityIndex} changeIndex={setcurrentCityIndex}/>
       
        <SwipeableViews enableMouseEvents  index={currentCityIndex} onChangeIndex={setcurrentCityIndex}> 
@@ -46,7 +47,8 @@ return cities;
           {citiesComponents()}
         
        </SwipeableViews> 
-       </ThemeContext.Provider>
+       </ThemeContext.Provider>)}
+       </>
     
   );
 };

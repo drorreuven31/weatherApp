@@ -4,14 +4,12 @@ import "./scss/CityInspect.scss";
 import { getLocationWeatherInfo } from "../../../services/weatherAPI";
 import { useSelector } from "react-redux";
 import dateFormat from "dateformat";
-import { unixToDateTime } from "../../../services/util";
+import { calcLocalTime, unixToDateTime } from "../../../services/util";
 import { getThemeData, getWeatherTime } from "../../../services/themes";
 
 
 const CityInspect = ({ lat, lon, local_names,isMyLocation,onClick }) => {
   const [forecast, setforecast] = useState();
-console.log(forecast)
-
 
   const lang = useSelector((state) => state.settings.lang);
 
@@ -25,12 +23,6 @@ console.log(forecast)
   const getPageBg=()=>{
     const bgImage= getThemeData(forecast.current.weather[0].main,getWeatherTime(forecast.current.weather[0].icon)).bgImage;
     return bgImage;
-  }
-
-  function calcLocalTime(){
-    let offset=new Date().getTimezoneOffset()*60
-    const time = forecast.current.dt+forecast.timezone_offset+offset
-    return time;
   }
 
   return (
@@ -47,7 +39,7 @@ console.log(forecast)
           ?
           local_names[lang]
           :
-          dateFormat(unixToDateTime(calcLocalTime()),"HH:MM")
+          dateFormat(unixToDateTime(calcLocalTime(forecast.current.dt,forecast.timezone_offset)),"HH:MM")
         
         }</div>
         <div className="weather-description">{forecast.current.weather[0].description}</div>

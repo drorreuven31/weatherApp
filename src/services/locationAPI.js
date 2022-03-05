@@ -12,6 +12,24 @@ const LocationAxios = axios.create({
 
 
 
+// gets city name and returns city information
+export async function getCitysInfoByName(cityname) {
+  if(cityname==="")
+    return [];
+
+  let url = `/direct?q=${cityname}&limit=7`;
+  const results = await LocationAxios.get(url);
+  if(!results.data)
+    return []
+  
+  let filteredResults =results.data.filter(res=>{
+   return res.local_names!==undefined?('en' in res.local_names ):false
+
+  })
+  
+  return filteredResults;
+  
+}
 
 
 

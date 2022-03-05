@@ -1,46 +1,83 @@
-import React, { useRef } from 'react'
-import './scss/MyCitiesPageHeader.scss'
-import { styled, alpha } from '@mui/material/styles';
+import React, { useRef, useState } from "react";
+import "./scss/MyCitiesPageHeader.scss";
+import PropTypes from "prop-types";
+import { IconButton } from "@mui/material";
+import { Cancel, SearchOutlined } from "@mui/icons-material";
+import MoreButton from "./MoreButton";
+import { getCitysInfoByName } from "../../../services/locationAPI";
+const MyCitiesPageHeader = ({
+  setsearchResults,
+  searchBarFocusedState: { searchBarFocused, setsearchBarFocused },
+  searchBarTextState: { searchBarText, setsearchBarText },
+}) => {
+  const clearButton = useRef();
+  const searchInput = useRef();
 
-import { IconButton } from '@mui/material';
-import { Cancel, SearchOutlined } from '@mui/icons-material';
-import MoreButton from './MoreButton';
-export const MyCitiesPageHeader = () => {
-    const cancelButton = useRef();
-    const searchInput = useRef();
+  const searchTextChanged = async (e) => {
+    let val = e.target.value;
+    setsearchBarText(val);
+    const res = await getCitysInfoByName(val);
+    setsearchResults(res);
+  };
 
-    const searchTextChanged =(e)=>{
-        if(e.target.value!="")
-            cancelButton.current.style.display='inline-flex'
-        else
-            cancelButton.current.style.display='none'
 
-        console.log(cancelButton.current.style)
-    }
+
 
   return (
-        <header className='my-cities-header'>
-        <div className="my-cities-header-content">
-            <div className="more-btn"><MoreButton /></div>
-        
-         
-        <h2 className="weather-text">Weather</h2>
-        <div className="search-bar-container">
-                    <SearchOutlined />
-                    <input type="text" onChange={searchTextChanged} placeholder="Search city" ref={searchInput}/>
-                    <IconButton className='cancel-btn'
-                     ref={cancelButton} 
-                     onClick={()=>{
-                         searchInput.current.value=''
-                         cancelButton.current.style.display='none'
-                     }}> 
-               
-                    <Cancel/>
-                    </IconButton>
-                </div>
-       
+    <header className="my-cities-header">
+      <div className="my-cities-header-content">
+        {!searchBarFocused && (
+          <>
+            <div className="more-btn">
+              <MoreButton />
             </div>
-        </header>
-  )
-}
-//style={{display:'none'}}
+            <h2 className="weather-text">Weather</h2>
+          </>
+        )}
+
+        <div className="search-bar-line-container">
+          <div className="search-bar-container">
+            <SearchOutlined />
+            <input
+              type="text"
+              value={searchBarText}
+              onChange={(e) => searchTextChanged(e)}
+              onFocus={() => setsearchBarFocused(true)}
+              placeholder="Search city"
+              ref={searchInput}
+            />
+            {searchBarText!==""&&
+            <IconButton
+              className="clear-btn"
+              ref={clearButton}
+              onClick={() => {
+                setsearchBarText("");
+              }}
+            >
+              <Cancel />
+            </IconButton>
+            }
+          </div>
+          {searchBarFocused && (
+            <button
+              className="cancel-btn"
+              onClick={() => {
+                setsearchBarFocused(false);
+                setsearchBarText('')
+              }}
+            >
+              Cancel
+            </button>
+          )}
+        </div>
+      </div>
+    </header>
+  );
+};
+MyCitiesPageHeader.propTypes = {
+  setsearchResults: PropTypes.func.isRequired,
+  searchBarFocusedState: PropTypes.object.isRequired,
+  searchBarTextState: PropTypes.object.isRequired,
+};
+
+export default MyCitiesPageHeader;

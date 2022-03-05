@@ -112,6 +112,7 @@ const CityForecastPage = ({ cityinfo,cityIndex ,currentIndex}) => {
             current={forecast.current}
             hourly={forecast.hourly.slice(0, 23)}
             daily={forecast.daily}
+            timezone_offset={forecast.timezone_offset}
           />
           <CurrentTempertureContext.Provider value={forecast.current} >
           <SevenDaysForecast daily={forecast.daily} />

@@ -10,16 +10,30 @@ export function useReadMyCities() {
     const [currentLocation, setCurrentLocation] = useState([]);
     const cities = useSelector(state=>state.cities.list)
     
+
+     // setting up te currentLocation
+     useEffect(() => {
+       
+      setUserLocation();
+    }, [])
+    
+
     //on mount , if the cities list state is empty bring it from the cookies
     useEffect(() => {
+      
         async function asyncSetCities(){
           if(currentLocation.length!==0){
+           
             let loc = await getCityNamebyCords(...currentLocation)
             loc.isMyLocation=true;
-            let cookie_cities =[loc,{name:"Milano",lat:45.477576, lon:9.233362,local_names:{en:"Milano",he:'מילאנו'}}];
-            cookie_cities=cookie_cities.concat(readMyCitiesFromCookies());
+            let cities =[loc];
+            let cookie_cities=readMyCitiesFromCookies();
+            debugger;
+            if(cookie_cities!==null)
+              cities=cities.concat(cookie_cities);
+              
            // debugger;
-            dispath(setCities(cookie_cities));
+            dispath(setCities(cities));
           }
         }
        
@@ -28,16 +42,12 @@ export function useReadMyCities() {
           }
     
         
-        // cookie.save('my_cities',cities,{path:'/'});
+       
          
        
     }, [currentLocation])
       
-    // setting up te currentLocation
-    useEffect(() => {
-      setUserLocation();
-    }, [])
-    
+   
 
 
     const readMyCitiesFromCookies = () => {
@@ -67,8 +77,9 @@ export function useReadMyCities() {
 
 
 
-
-    return cities;
-
+  let filtered = cities.filter(function (el) {
+    return el != null;
+  });
+  return filtered;
 }
 

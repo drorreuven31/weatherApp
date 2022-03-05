@@ -10,4 +10,11 @@ export function unixToDateTime(unix){
   return date
 }
 
+export function calcLocalTime(dt,timezone_offset){
+  let offset=new Date().getTimezoneOffset()*60
+  const time = dt+timezone_offset+offset
+  return time;
+}
+
 export const weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
