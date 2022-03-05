@@ -21,14 +21,19 @@ const MyCitiesPage = (props) => {
   const dispath = useDispatch();
 
   const handleAddCity = (cityinfo) => {
-    //debugger;
+  
     //update the cookies
     let cookies_cities = citiesInfo.map((a) => Object.assign({}, a));
     cookies_cities = cookies_cities.filter((x) => !x.isMyLocation);
     cookies_cities.push(cityinfo);
-
+    console.log('set cookie to:' )
+    console.log(cookies_cities )
+    try{
     setCookie('my_cities',cookies_cities,{ path: '/' })
-
+    }
+    catch{
+      console.log('shit')
+    }
     dispath(addCity(cityinfo));
     setsearchBarText("");
     setsearchBarFocused(false);
