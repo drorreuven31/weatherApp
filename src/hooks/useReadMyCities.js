@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import cookie from "react-cookies";
 import { useSelector,useDispatch } from "react-redux";
 import { getCityNamebyCords } from "../services/locationAPI";
 import { setCities } from "../services/redux/citiesListSlice";
-
+import {useCookies} from "react-cookie";
 
 export function useReadMyCities() {
     const dispath = useDispatch()
     const [currentLocation, setCurrentLocation] = useState([]);
     const cities = useSelector(state=>state.cities.list)
-    
+    const [cookies, setCookie, removeCookie] = useCookies(['my_cities']);
 
      // setting up te currentLocation
      useEffect(() => {
@@ -27,16 +26,18 @@ export function useReadMyCities() {
             let loc = await getCityNamebyCords(...currentLocation)
             loc.isMyLocation=true;
             let cities =[loc];
-            let cookie_cities=readMyCitiesFromCookies();
-            debugger;
-            if(cookie_cities!==null)
-              cities=cities.concat(cookie_cities);
+         
+          
+            if(cookies.my_cities!==null){
               
-           // debugger;
+              cities=cities.concat(cookies.my_cities);
+            }
+          
             dispath(setCities(cities));
           }
         }
        
+        
           if(cities.length===0&&currentLocation.length>0){
             asyncSetCities()
           }
@@ -45,16 +46,10 @@ export function useReadMyCities() {
        
          
        
-    }, [currentLocation])
+    }, [currentLocation,cookies])
       
    
 
-
-    const readMyCitiesFromCookies = () => {
-     return cookie.load("my_cities");
-    };
-
-    
 
   const setUserLocation = () => {
     const HolonCoords=[32.0193121, 34.7804076];
