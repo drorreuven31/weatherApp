@@ -3,10 +3,15 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import "./scss/CurrentTemperatureData.scss";
 
-import { UpperCaseFirstLettersSentence } from "../../../services/util";
+import { getLeftRightTextMargin, UpperCaseFirstLettersSentence } from "../../../services/util";
+import keywords from "../../../services/redux/translationTexts";
+import LangButton from "./Header/LangButton";
+import { useSelector } from "react-redux";
 
 const CurrentTemperatureData = ({ cityName, lat, lon,forecast }) => {
-  
+  const lang = useSelector((state) => state.settings.lang )
+
+ 
   return (
     <>
       {forecast ? (
@@ -24,8 +29,8 @@ const CurrentTemperatureData = ({ cityName, lat, lon,forecast }) => {
           </div>
 
           <div className="min_max_tempertures">
-            <div className="min">Min: {Math.round(forecast.daily[0].temp.min)}°</div>
-            <div className="max">Max: {Math.round(forecast.daily[0].temp.max)}°</div>
+            <div className="min" style={getLeftRightTextMargin(lang,'1rem')}>{keywords['min'][lang.id]}: {Math.round(forecast.daily[0].temp.min)}°</div>
+            <div className="max">{keywords['max'][lang.id]}: {Math.round(forecast.daily[0].temp.max)}°</div>
           </div>
         </div>
       ) : (

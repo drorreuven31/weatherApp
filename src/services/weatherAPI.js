@@ -12,8 +12,10 @@ const WeatherAxios = axios.create({
 });
 
 
-export  async function getLocationWeatherInfo(lat, lon) {
-    let url = `onecall?lat=${lat}&lon=${lon}&lang=en&units=${'metric'}&exclude=${'minutely,alerts'}`;
+export  async function getLocationWeatherInfo(lat, lon,temp,lang) {
+
+    let units=temp=='f'?'imperial':'metric';
+    let url = `onecall?lat=${lat}&lon=${lon}&lang=${lang}&units=${units}&exclude=${'minutely,alerts'}`;
     const res = await WeatherAxios.get(url);
     return res.data;
   }

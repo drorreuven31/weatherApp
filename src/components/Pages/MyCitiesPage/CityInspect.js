@@ -32,12 +32,12 @@ const CityInspect = ({ lat, lon, local_names,isMyLocation,onClick }) => {
     <div className="CityInspect" onClick={onClick} style={{backgroundImage:`url(${getPageBg()})`}}>
       <div className="left-section">
         <h4 className="city-name">{
-          isMyLocation?'My Location':local_names[lang]
+          isMyLocation?'My Location':local_names[lang.id]
         }</h4>
         <div className="city-time">{
           isMyLocation
           ?
-          local_names[lang]
+          local_names[lang.id]
           :
           dateFormat(unixToDateTime(calcLocalTime(forecast.current.dt,forecast.timezone_offset)),"HH:MM")
         

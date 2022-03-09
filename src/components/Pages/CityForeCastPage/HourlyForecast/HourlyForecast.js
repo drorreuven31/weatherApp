@@ -5,7 +5,7 @@ import HourData from './HourData'
 
 import { useHorizontalScroll } from '../../../../hooks/useHorizontalScroll'
 import MainInfoBox from '../MainInfoBox'
-import { calcLocalTime, unixToDateTime } from '../../../../services/util'
+import { calcLocalTime, getLeftRightTextMargin, unixToDateTime } from '../../../../services/util'
 
 import dateFormat from 'dateformat'
 import _ from 'lodash'
@@ -13,11 +13,14 @@ import { ReactComponent as SunrizeIcon } from '../../../../resources/icons/sunri
 import { ReactComponent as SunsetIcon } from '../../../../resources/icons/sunset.svg';
 
 import Hour from '@mui/icons-material/QueryBuilder';
+import keywords from '../../../../services/redux/translationTexts'
+import { useSelector } from 'react-redux'
 
 const HourlyForecast = ({ current, hourly,daily,timezone_offset }) => {
   const scrollRef = useHorizontalScroll()
   const [hoursObjects,sethoursObjects] = useState(hourly);
- 
+  const lang = useSelector((state) => state.settings.lang )
+
   const sunStateObjects=()=>{
 
     let dt = Date.now()/1000;
@@ -90,9 +93,9 @@ const CreateObjectsList =()=>{
       <MainInfoBox
         boxDescription={
           <>
-          <Hour style={{marginRight:".3rem"}}/>
+          <Hour style={getLeftRightTextMargin(lang,'.3rem')}/>
           <h6>
-            HOURLY FORECAST
+            {keywords['hourly_forecast'][lang.id]}
           </h6>
           </>
         }

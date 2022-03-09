@@ -31,10 +31,12 @@ const CityForecastPage = ({ cityinfo,cityIndex ,currentIndex}) => {
   const [forecast, setForecast] = useState(null)
   const columnNumber = useColumCalculator()
   const lang = useSelector((state) => state.settings.lang )
+  const temp = useSelector((state) => state.settings.temp )
   const {setTheme} = useContext(ThemeContext);
 
+
   async function fetchWeatherInfo() {
-    const _forcast = await getLocationWeatherInfo(lat, lon);
+    const _forcast = await getLocationWeatherInfo(lat, lon,temp,lang.id);
     setForecast(_forcast);
     console.log('forecast updated!')
    }
@@ -43,8 +45,7 @@ const CityForecastPage = ({ cityinfo,cityIndex ,currentIndex}) => {
   useEffect(() => {
     if (lat && lon)
      fetchWeatherInfo().catch()
-      
-  }, [lat, lon])
+  }, [lat, lon,lang,temp])
   
   //for updating every minute
   useEffect(() => {
@@ -97,13 +98,14 @@ const CityForecastPage = ({ cityinfo,cityIndex ,currentIndex}) => {
   }
 
   return (
+    
     <>
-      {forecast && (
-    <div className='pagewrapper' style={{backgroundImage:`url(${getPageBg()})`}}>
+      {(forecast&&lang) && (
+    <div className={'pagewrapper ' +`${lang.direction}-div`} style={{backgroundImage:`url(${getPageBg()})`}}>
       
         <div className='page'>
           <CurrentTemperatureData
-            cityName={local_names[lang]}
+            cityName={local_names[lang.id]}
             lat={lat}
             lon={lon}
             forecast={forecast}

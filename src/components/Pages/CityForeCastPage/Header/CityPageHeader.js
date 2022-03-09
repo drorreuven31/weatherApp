@@ -12,12 +12,14 @@ import NavigationIcon from '@mui/icons-material/Navigation';
 import { ThemeContext } from "../AllCitiesWrapper";
 import { getThemeData } from "../../../../services/themes";
 import useTheme from "../../../../hooks/useTheme";
+import { useSelector } from "react-redux";
 const CityPageHeader = (props) => {
   const {bg} = useTheme();
+  const lang = useSelector((state) => state.settings.lang )
 
   return (
     <header>
-      <div className="header-content" style={{backgroundColor:bg}}>
+      <div className={"header-content"+` ${lang.direction}-div`} style={{backgroundColor:bg}}>
         <IconButton className="icon" component={Link} to={"/myCities"}>
           <ListIcon />
         </IconButton>

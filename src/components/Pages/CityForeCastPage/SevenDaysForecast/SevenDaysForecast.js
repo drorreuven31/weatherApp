@@ -3,13 +3,15 @@ import PropTypes from "prop-types";
 import MainInfoBox from "../MainInfoBox";
 import DayData from "./DayData";
 import _ from "lodash";
-import { unixToDateTime, weekdays } from "../../../../services/util";
+import { getLeftRightTextMargin, unixToDateTime, weekdays } from "../../../../services/util";
 
 import WeekIcon from "@mui/icons-material/DateRange";
-
+import keywords from "../../../../services/redux/translationTexts";
+import { useSelector } from "react-redux";
 
 export const WeekMinMaxTempContext = React.createContext();
 const SevenDaysForecast = (props) => {
+  const lang = useSelector((state) => state.settings.lang )
 
   const createWeekMinMaxTemp =()=>{
     let temps =props.daily.reduce((temparr,day)=>{
@@ -29,8 +31,8 @@ const SevenDaysForecast = (props) => {
         <MainInfoBox
           boxDescription={
             <>
-              <WeekIcon style={{ marginRight: ".3rem" }} />
-              <h6>7-DAYS FORECAST</h6>
+              <WeekIcon style={getLeftRightTextMargin(lang,'.3rem')} />
+              <h6>{keywords['seven_days_forecast'][lang.id]}</h6>
             </>
           }
         >

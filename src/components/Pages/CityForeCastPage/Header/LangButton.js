@@ -11,17 +11,17 @@ export default function LangButton() {
   const lang = useSelector((state) => state.settings.lang)
 
   function changeLanguage(lang) {
-      dispatch(changeLang(lang));
+      dispatch(changeLang(langs.filter(x=>x.id==lang)[0]));
   }
 
   return (
     <DropDownButton className='icon'
     icon={<LanguageIcon/>}
     onClick={changeLanguage}
-    selected={lang}
+    selected={lang.id}
     options={langs}
     />
   );
 }
 
-const langs = [{id:"en",name:"English"}, {id:"he",name:"Hebrew"}];
+const langs = [{id:"en",name:"English",direction:'ltr',dir:'left'}, {id:"he",name:"Hebrew",direction:'rtl',dir:'right'}];
