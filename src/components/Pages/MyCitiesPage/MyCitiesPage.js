@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addCity } from "../../../services/redux/citiesListSlice";
 import {useCookies} from "react-cookie";
-
+import keywords from "../../../services/translationTexts";
 const MyCitiesPage = (props) => {
   const citiesInfo = useReadMyCities();
   const navigate = useNavigate();
@@ -19,6 +19,7 @@ const MyCitiesPage = (props) => {
   const [cookies, setCookie, removeCookie] = useCookies(['my_cities']);
 
   const dispath = useDispatch();
+  const lang = useSelector((state) => state.settings.lang )
 
   const handleAddCity = (cityinfo) => {
   
@@ -42,9 +43,7 @@ const MyCitiesPage = (props) => {
   return (
     <div
       className="CitiesPage-page-wrapper"
-      style={{
-        height: searchBarText !== "" && searchBarFocused ? "100%" : "100%",
-      }}
+      
     >
       <MyCitiesPageHeader
         setsearchResults={setsearchResults}
@@ -56,9 +55,9 @@ const MyCitiesPage = (props) => {
         {searchBarText !== "" && searchBarFocused ? (
           <>
             {searchResults.length > 0 ? (
-              <div className="search-result-list">
+              <div className={`search-result-list ${lang.direction}-div text-${lang.dir}`}>
                 {searchResults.map((res) => {
-                  let name = res.local_names["en"];
+                  let name = res.local_names[lang.id];
                   let bold = name.slice(0, searchBarText.length);
                   let regular = name.slice(searchBarText.length, name.length);
                   return (
@@ -76,10 +75,10 @@ const MyCitiesPage = (props) => {
                 })}
               </div>
             ) : (
-              <div className="no-results">
+              <div className={`no-results ${lang.direction}-div`}>
                 <SearchOutlined/>
-                 <h2>No Results</h2>
-              <h5>No results found for "{searchBarText}".</h5>
+                 <h2>{keywords['no_results'][lang.id]}</h2>
+              <h5>{keywords['no_results_found'][lang.id]} "{searchBarText}".</h5>
               </div>
             )}
           </>

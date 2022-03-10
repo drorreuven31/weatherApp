@@ -19,11 +19,11 @@ const CityPageHeader = (props) => {
 
   return (
     <header>
-      <div className={"header-content"+` ${lang.direction}-div`} style={{backgroundColor:bg}}>
+      <div className={"header-content"} style={{backgroundColor:bg}}>
         <IconButton className="icon" component={Link} to={"/myCities"}>
           <ListIcon />
         </IconButton>
-      <div className="tabs">
+      <div className={"tabs"+` ${lang.direction}-div`} >
           
          {Array(props.locationsNumber).fill(0).map((_, i) => {
            return(

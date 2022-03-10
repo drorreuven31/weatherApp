@@ -13,7 +13,7 @@ import { ReactComponent as SunrizeIcon } from '../../../../resources/icons/sunri
 import { ReactComponent as SunsetIcon } from '../../../../resources/icons/sunset.svg';
 
 import Hour from '@mui/icons-material/QueryBuilder';
-import keywords from '../../../../services/redux/translationTexts'
+import keywords from '../../../../services/translationTexts'
 import { useSelector } from 'react-redux'
 
 const HourlyForecast = ({ current, hourly,daily,timezone_offset }) => {
@@ -32,7 +32,7 @@ const HourlyForecast = ({ current, hourly,daily,timezone_offset }) => {
       dt:daily[relevant_sunrise_day].sunrise,
       hour:dateFormat(unixToDateTime(calcLocalTime(daily[relevant_sunrise_day].sunrise,timezone_offset)),"HH:MM"),
       icon:<SunrizeIcon className='weathersvgIcon'/>,
-      temp:'Sunrise',
+      temp:keywords['sunrise'][lang.id],
       isSunState:true
     }
       
@@ -41,7 +41,7 @@ const HourlyForecast = ({ current, hourly,daily,timezone_offset }) => {
       dt:daily[relevant_sunset_day].sunset,
       hour:dateFormat(unixToDateTime(calcLocalTime(daily[relevant_sunset_day].sunset,timezone_offset)),"HH:MM"),
       icon:<SunsetIcon className='weathersvgIcon'/>,
-      temp:'Sunset',
+      temp:keywords['sunset'][lang.id],
       isSunState:true
     }
     return([sunrize,sunset]);
@@ -67,7 +67,7 @@ const CreateObjectsList =()=>{
           hour={
             index !== 0
               ? unixToDateTime(calcLocalTime(h.dt,timezone_offset)).getHours().toString()
-              : 'Now'
+              : keywords['now'][lang.id]
           }
           temp={Math.round(h.temp)+""}
           icon={h.weather[0].icon}

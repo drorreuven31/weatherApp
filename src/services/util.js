@@ -18,12 +18,17 @@ export function calcLocalTime(dt,timezone_offset){
 
 
 export const getLeftRightTextMargin =(lang,rem)=>{
-  let dir =lang.dir=='right'?'left':'right'
+  let dir =lang.dir=='right'?'Left':'Right'
   let styles={};
-  styles[`margin-${dir}`]=rem
+  styles[`margin${dir}`]=rem
   return styles;
 }
+export function oppositeDirection(dir){
+  if(dir==="right")
+    return "left"
 
+  return "right";
+}
 
 export const weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 

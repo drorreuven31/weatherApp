@@ -15,8 +15,8 @@ $flex-direction: row;
     width: 10%;
   }
   .dayName {
-    text-align: left;
-    width: 20%;
+   // justify-content: flex-start;
+    width: 10%;
   }
   .dayMinTemp{
     color: #bdbdbdbd;

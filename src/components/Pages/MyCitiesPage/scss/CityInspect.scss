@@ -10,7 +10,7 @@
 
   background-size: cover;
   //animation: animatedBackground 300s linear alternate infinite;
-  text-align: left;
+  //text-align: left;
   padding: 0.5rem 1rem;
   display: flex;
   flex-direction: row;
@@ -22,6 +22,7 @@
   cursor: pointer;
 
   .left-section {
+   
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -33,16 +34,18 @@
        font-size: 0.8rem;
     }
     .weather-description{
+      text-align: inherit;
         font-size: 0.8rem;
     }
   }
   .right-section {
+   
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
     .current-temp {
-      text-align: right;
+     
       font-size: 2rem;
     }
   }

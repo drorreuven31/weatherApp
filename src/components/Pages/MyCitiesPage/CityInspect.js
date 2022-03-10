@@ -4,21 +4,25 @@ import "./scss/CityInspect.scss";
 import { getLocationWeatherInfo } from "../../../services/weatherAPI";
 import { useSelector } from "react-redux";
 import dateFormat from "dateformat";
-import { calcLocalTime, unixToDateTime } from "../../../services/util";
+import { calcLocalTime, oppositeDirection, unixToDateTime } from "../../../services/util";
 import { getThemeData, getWeatherTime } from "../../../services/themes";
+import keywords from "../../../services/translationTexts";
 
 
 const CityInspect = ({ lat, lon, local_names,isMyLocation,onClick }) => {
   const [forecast, setforecast] = useState();
 
   const lang = useSelector((state) => state.settings.lang);
+  const temp = useSelector((state) => state.settings.temp);
 
   useEffect(() => {
     async function fetchForecast() {
-      setforecast(await getLocationWeatherInfo(lat, lon));
+      setforecast(await getLocationWeatherInfo(lat, lon,temp,lang.id));
     }
+   
     if (lat && lon) fetchForecast();
-  }, [lat, lon]);
+
+  }, [lat, lon,lang,temp]);
 
   const getPageBg=()=>{
     const bgImage= getThemeData(forecast.current.weather[0].main,getWeatherTime(forecast.current.weather[0].icon)).bgImage;
@@ -29,10 +33,10 @@ const CityInspect = ({ lat, lon, local_names,isMyLocation,onClick }) => {
     <>
     {forecast&&(
 
-    <div className="CityInspect" onClick={onClick} style={{backgroundImage:`url(${getPageBg()})`}}>
-      <div className="left-section">
+    <div className={"CityInspect"+` ${lang.direction}-div`} onClick={onClick} style={{backgroundImage:`url(${getPageBg()})`}}>
+      <div className={`left-section text-${lang.dir}`}>
         <h4 className="city-name">{
-          isMyLocation?'My Location':local_names[lang.id]
+          isMyLocation?keywords['my_location'][lang.id]:local_names[lang.id]
         }</h4>
         <div className="city-time">{
           isMyLocation
@@ -45,10 +49,10 @@ const CityInspect = ({ lat, lon, local_names,isMyLocation,onClick }) => {
         <div className="weather-description">{forecast.current.weather[0].description}</div>
       </div>
       
-      <div className="right-section">
-        <div className="current-temp">{ Math.round(forecast.current.temp)}°</div>
+      <div className={`right-section text-${lang.dir}`}>
+        <div className={`current-temp text-${oppositeDirection(lang.dir)}`}>{ Math.round(forecast.current.temp)}°</div>
         <div className="min-max-container">{
-            `Min: ${Math.round(forecast.daily[0].temp.min)}°  Max: ${Math.round(forecast.daily[0].temp.max)}°`
+            `${keywords['min'][lang.id]}: ${Math.round(forecast.daily[0].temp.min)}°  ${keywords['max'][lang.id]}: ${Math.round(forecast.daily[0].temp.max)}°`
         }</div>
       </div>
     </div>

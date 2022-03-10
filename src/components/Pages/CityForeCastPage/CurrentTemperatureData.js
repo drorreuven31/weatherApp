@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import "./scss/CurrentTemperatureData.scss";
 
 import { getLeftRightTextMargin, UpperCaseFirstLettersSentence } from "../../../services/util";
-import keywords from "../../../services/redux/translationTexts";
+import keywords from "../../../services/translationTexts";
 import LangButton from "./Header/LangButton";
 import { useSelector } from "react-redux";
 

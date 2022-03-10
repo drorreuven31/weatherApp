@@ -13,7 +13,7 @@ const LocationAxios = axios.create({
 
 
 // gets city name and returns city information
-export async function getCitysInfoByName(cityname) {
+export async function getCitysInfoByName(cityname,current_lang) {
   if(cityname==="")
     return [];
 
@@ -23,7 +23,7 @@ export async function getCitysInfoByName(cityname) {
     return []
   
   let filteredResults =results.data.filter(res=>{
-   return res.local_names!==undefined?('en' in res.local_names ):false
+   return res.local_names!==undefined?(current_lang in res.local_names ):false
 
   })
   

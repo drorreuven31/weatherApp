@@ -20,6 +20,8 @@ import CityPageHeader from './Header/CityPageHeader'
 import { useSelector } from 'react-redux'
 import { getThemeData, getWeatherTime } from '../../../services/themes'
 import { ThemeContext } from './AllCitiesWrapper'
+import keywords from '../../../services/translationTexts'
+import { getLeftRightTextMargin } from '../../../services/util'
 
 
 export const CurrentTempertureContext = React.createContext();
@@ -73,23 +75,23 @@ const CityForecastPage = ({ cityinfo,cityIndex ,currentIndex}) => {
 
 
   const createSmallDataBoxes = () => [
-    <SmallInfoBox boxDescription={<><AirIcon style={{marginRight:".3rem"}}/> <h6>Wind</h6></>} key={1}>
-      {forecast.current.wind_speed} Km/h
+    <SmallInfoBox boxDescription={<><AirIcon style={getLeftRightTextMargin(lang,'.3rem')}/> <h6>{keywords['wind'][lang.id]}</h6></>} key={1}>
+      {forecast.current.wind_speed} {keywords['km_h'][lang.id]}
     </SmallInfoBox>,
-    <SmallInfoBox boxDescription={<><TempIcon style={{marginRight:".3rem"}}/> <h6>Feels Like</h6></>} key={2}>
+    <SmallInfoBox boxDescription={<><TempIcon style={getLeftRightTextMargin(lang,'.3rem')}/> <h6>{keywords['feels_like'][lang.id]}</h6></>} key={2}>
       {Math.round(forecast.current.feels_like)}°
     </SmallInfoBox>,
-    <SmallInfoBox boxDescription={<><UvIcon style={{marginRight:".3rem"}}/> <h6>UV Index</h6></>} key={3}>
+    <SmallInfoBox boxDescription={<><UvIcon style={getLeftRightTextMargin(lang,'.3rem')}/> <h6>{keywords['uv_index'][lang.id]}</h6></>} key={3}>
       {forecast.current.uvi}
     </SmallInfoBox>,
-    <SmallInfoBox boxDescription={<><VisibilityIcon style={{marginRight:".3rem"}}/> <h6>Visibility</h6></>} key={4}>
-      {Math.round(forecast.current.visibility / 1000)} Km
+    <SmallInfoBox boxDescription={<><VisibilityIcon style={getLeftRightTextMargin(lang,'.3rem')}/> <h6>{keywords['visibility'][lang.id]}</h6></>} key={4}>
+      {Math.round(forecast.current.visibility / 1000)} {keywords['km'][lang.id]}
     </SmallInfoBox>,
-    <SmallInfoBox boxDescription={<><HumidityIcon style={{marginRight:".3rem"}}/> <h6>Humidity</h6></>} key={5}>
+    <SmallInfoBox boxDescription={<><HumidityIcon style={getLeftRightTextMargin(lang,'.3rem')}/> <h6>{keywords['humidity'][lang.id]}</h6></>} key={5}>
       {forecast.current.humidity}%
     </SmallInfoBox>,
-    <SmallInfoBox boxDescription={<><PressureIcon style={{marginRight:".3rem"}}/> <h6>Pressure</h6></>} key={6}>
-    {forecast.current.pressure} Mb
+    <SmallInfoBox boxDescription={<><PressureIcon style={getLeftRightTextMargin(lang,'.3rem')}/> <h6>{keywords['pressure'][lang.id]}</h6></>} key={6}>
+    {forecast.current.pressure} {keywords['mb'][lang.id]}
   </SmallInfoBox>,
   ]
   

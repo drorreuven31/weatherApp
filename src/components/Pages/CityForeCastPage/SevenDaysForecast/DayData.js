@@ -3,14 +3,15 @@ import PropTypes from 'prop-types'
 import './scss/DayData.scss'
 
 import TempRangeBar from './TempRangeBar'
+import { useSelector } from 'react-redux'
 
 
 const DayData = ({ dayOfWeek, minTemp,maxTemp,icon,isToday}) => {
   
- 
+  const lang = useSelector((state) => state.settings.lang )
   return (
    <>
-    <div className='DayData'>
+    <div className={`DayData text-${lang.dir}`}>
       <div className='dayName'>{dayOfWeek}</div>
      
         <img

@@ -6,7 +6,7 @@ import _ from "lodash";
 import { getLeftRightTextMargin, unixToDateTime, weekdays } from "../../../../services/util";
 
 import WeekIcon from "@mui/icons-material/DateRange";
-import keywords from "../../../../services/redux/translationTexts";
+import keywords from "../../../../services/translationTexts";
 import { useSelector } from "react-redux";
 
 export const WeekMinMaxTempContext = React.createContext();
@@ -43,8 +43,8 @@ const SevenDaysForecast = (props) => {
                   key={_day.dt}
                   dayOfWeek={
                     index !== 0
-                      ? weekdays[unixToDateTime(_day.dt).getDay()]
-                      : "Today"
+                      ? keywords['weekdays'][lang.id][unixToDateTime(_day.dt).getDay()]
+                      : keywords['today'][lang.id]
                   }
                   icon={_day.weather[0].icon}
                   minTemp={Math.round(_day.temp.min)}

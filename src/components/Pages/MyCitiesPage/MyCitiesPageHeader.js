@@ -5,6 +5,9 @@ import { IconButton } from "@mui/material";
 import { Cancel, SearchOutlined } from "@mui/icons-material";
 import MoreButton from "./MoreButton";
 import { getCitysInfoByName } from "../../../services/locationAPI";
+import { useSelector } from "react-redux";
+import keywords from "../../../services/translationTexts";
+import { getLeftRightTextMargin } from "../../../services/util";
 const MyCitiesPageHeader = ({
   setsearchResults,
   searchBarFocusedState: { searchBarFocused, setsearchBarFocused },
@@ -12,11 +15,12 @@ const MyCitiesPageHeader = ({
 }) => {
   const clearButton = useRef();
   const searchInput = useRef();
+  const lang = useSelector((state) => state.settings.lang )
 
   const searchTextChanged = async (e) => {
     let val = e.target.value;
     setsearchBarText(val);
-    const res = await getCitysInfoByName(val);
+    const res = await getCitysInfoByName(val,lang.id);
     setsearchResults(res);
   };
 
@@ -25,25 +29,25 @@ const MyCitiesPageHeader = ({
 
   return (
     <header className="my-cities-header">
-      <div className="my-cities-header-content">
+      <div className={`my-cities-header-content ${lang.direction}-div`}>
         {!searchBarFocused && (
           <>
             <div className="more-btn">
               <MoreButton />
             </div>
-            <h2 className="weather-text">Weather</h2>
+            <h2 className="weather-text">{keywords['weather'][lang.id]}</h2>
           </>
         )}
 
         <div className="search-bar-line-container">
           <div className="search-bar-container">
-            <SearchOutlined />
-            <input
+            <SearchOutlined style={getLeftRightTextMargin(lang,'.5rem')}/>
+            <input 
               type="text"
               value={searchBarText}
               onChange={(e) => searchTextChanged(e)}
               onFocus={() => setsearchBarFocused(true)}
-              placeholder="Search city"
+              placeholder={keywords['search_city'][lang.id]}
               ref={searchInput}
             />
             {searchBarText!==""&&
@@ -66,7 +70,7 @@ const MyCitiesPageHeader = ({
                 setsearchBarText('')
               }}
             >
-              Cancel
+              {keywords['cancel'][lang.id]}
             </button>
           )}
         </div>
