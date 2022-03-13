@@ -9,7 +9,8 @@ import { getThemeData, getWeatherTime } from "../../../services/themes";
 import keywords from "../../../services/translationTexts";
 
 
-const CityInspect = ({ lat, lon, local_names,isMyLocation,onClick }) => {
+import SwipeToDelete from "../../SwipeToDelete/SwipeToDelete";
+const CityInspect = ({ lat, lon, local_names,isMyLocation,onClick,onDelete }) => {
   const [forecast, setforecast] = useState();
 
   const lang = useSelector((state) => state.settings.lang);
@@ -29,33 +30,45 @@ const CityInspect = ({ lat, lon, local_names,isMyLocation,onClick }) => {
     return bgImage;
   }
 
+  const swipeContent=()=>(
+  <div className={"CityInspect"+` ${lang.direction}-div`} style={{backgroundImage:`url(${getPageBg()})`}}>
+  <div className={`left-section text-${lang.dir}`}>
+    <h4 className="city-name">{
+      isMyLocation?keywords['my_location'][lang.id]:local_names[lang.id]
+    }</h4>
+    <div className="city-time">{
+      isMyLocation
+      ?
+      local_names[lang.id]
+      :
+      dateFormat(unixToDateTime(calcLocalTime(forecast.current.dt,forecast.timezone_offset)),"HH:MM")
+    
+    }</div>
+    <div className="weather-description">{forecast.current.weather[0].description}</div>
+  </div>
+  
+  <div className={`right-section text-${lang.dir}`}>
+    <div className={`current-temp text-${oppositeDirection(lang.dir)}`}>{ Math.round(forecast.current.temp)}°</div>
+    <div className="min-max-container">{
+        `${keywords['min'][lang.id]}: ${Math.round(forecast.daily[0].temp.min)}°  ${keywords['max'][lang.id]}: ${Math.round(forecast.daily[0].temp.max)}°`
+    }</div>
+  </div>
+</div>);
+
+
   return (
     <>
     {forecast&&(
-
-    <div className={"CityInspect"+` ${lang.direction}-div`} onClick={onClick} style={{backgroundImage:`url(${getPageBg()})`}}>
-      <div className={`left-section text-${lang.dir}`}>
-        <h4 className="city-name">{
-          isMyLocation?keywords['my_location'][lang.id]:local_names[lang.id]
-        }</h4>
-        <div className="city-time">{
-          isMyLocation
-          ?
-          local_names[lang.id]
-          :
-          dateFormat(unixToDateTime(calcLocalTime(forecast.current.dt,forecast.timezone_offset)),"HH:MM")
-        
-        }</div>
-        <div className="weather-description">{forecast.current.weather[0].description}</div>
-      </div>
-      
-      <div className={`right-section text-${lang.dir}`}>
-        <div className={`current-temp text-${oppositeDirection(lang.dir)}`}>{ Math.round(forecast.current.temp)}°</div>
-        <div className="min-max-container">{
-            `${keywords['min'][lang.id]}: ${Math.round(forecast.daily[0].temp.min)}°  ${keywords['max'][lang.id]}: ${Math.round(forecast.daily[0].temp.max)}°`
-        }</div>
-      </div>
-    </div>
+      <>
+      {!isMyLocation?(
+        <SwipeToDelete rtl={lang.direction==="rtl"} onClick={onClick} onDelete={onDelete} >
+          {swipeContent()}
+        </SwipeToDelete>):
+        <div onClick={onClick} style={{marginBottom:'.5rem'}}>
+          {swipeContent()}
+          </div>
+      }
+     </>
     )}
     </>
   )
@@ -67,6 +80,7 @@ CityInspect.propTypes = {
   local_names: PropTypes.object.isRequired,
   isMyLocation: PropTypes.bool,
   onClick:PropTypes.func.isRequired,
+  onDelete:PropTypes.func
 };
 
 export default CityInspect;

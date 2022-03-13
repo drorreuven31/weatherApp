@@ -5,6 +5,7 @@ import SwipeableViews from "react-swipeable-views";
 import CityForecastPage from "./CityForecastPage";
 import { useReadMyCities } from "../../../hooks/useReadMyCities";
 import CityPageHeader from "./Header/CityPageHeader";
+import { useSelector } from "react-redux";
 
 export const ThemeContext = createContext({
   theme: {},
@@ -17,7 +18,7 @@ const AllCitiesWrapper = (props) => {
   //debugger;
   const [currentCityIndex, setcurrentCityIndex] = useState(props.startOn)
   const [theme, setTheme] = useState({theme:'Clear',time:"day"})
-
+  const lang = useSelector((state) => state.settings.lang )
   useEffect(() => {
     setcurrentCityIndex(props.startOn);
 }, [props.startOn])
@@ -42,7 +43,7 @@ return cities;
     {citiesInfo&&(<ThemeContext.Provider value={{theme,setTheme}}>
       <CityPageHeader locationsNumber={citiesInfo.length} index={currentCityIndex} changeIndex={setcurrentCityIndex}/>
       
-       <SwipeableViews enableMouseEvents  index={currentCityIndex} onChangeIndex={setcurrentCityIndex}> 
+       <SwipeableViews enableMouseEvents  index={currentCityIndex} onChangeIndex={setcurrentCityIndex} axis={lang.direction==='ltr'?'x':'x-reverse'}> 
          
           {citiesComponents()}
         

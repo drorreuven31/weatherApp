@@ -7,7 +7,7 @@ import CityInspect from "./CityInspect";
 import { Delete ,SearchOutlined} from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addCity } from "../../../services/redux/citiesListSlice";
+import { addCity,removeCity } from "../../../services/redux/citiesListSlice";
 import {useCookies} from "react-cookie";
 import keywords from "../../../services/translationTexts";
 const MyCitiesPage = (props) => {
@@ -38,6 +38,25 @@ const MyCitiesPage = (props) => {
     dispath(addCity(cityinfo));
     setsearchBarText("");
     setsearchBarFocused(false);
+  };
+
+  const handleRemoveCity = (cityinfo) => {
+    debugger;
+    //update the cookies
+    let cookies_cities =citiesInfo.map((a) => Object.assign({}, a));
+    cookies_cities = cookies_cities.filter((x) => !x.isMyLocation);
+    let removed_index=cookies_cities.findIndex(x=>x.lat===cityinfo.lat)
+    cookies_cities.splice(removed_index,1)
+    console.log('set cookie to:' )
+    console.log(cookies_cities )
+    try{
+    setCookie('my_cities',cookies_cities,{ path: '/' })
+    }
+    catch{
+      console.log('shit')
+    }
+    dispath(removeCity(cityinfo));
+    
   };
 
   return (
@@ -95,6 +114,7 @@ const MyCitiesPage = (props) => {
                       key={c.lat}
                       {...c}
                       onClick={() => navigate(`/city/${i}`)}
+                      onDelete={()=>handleRemoveCity(c)}
                     />
                   );
                 })}

@@ -4,7 +4,9 @@
   100% { background-position: 0 0; }
 }
 
-
+.swipe-container{
+ margin-bottom: 0.5rem;
+}
 .CityInspect {
   background-repeat: repeat-x ;
 
@@ -18,7 +20,7 @@
   height: 12vh;
   
   border-radius: 1rem;
-  margin-bottom: 0.5rem;
+ 
   cursor: pointer;
 
   .left-section {

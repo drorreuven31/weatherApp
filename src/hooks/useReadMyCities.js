@@ -12,11 +12,10 @@ export function useReadMyCities() {
 
      // setting up te currentLocation
      useEffect(() => {
-       
-      setUserLocation();
+      if(currentLocation.length===0)
+        setUserLocation();
     }, [])
     
-
     //on mount , if the cities list state is empty bring it from the cookies
     useEffect(() => {
       
@@ -37,15 +36,10 @@ export function useReadMyCities() {
           }
         }
        
-        
           if(cities.length===0&&currentLocation.length>0){
             asyncSetCities()
           }
     
-        
-       
-         
-       
     }, [currentLocation,cookies])
       
    
@@ -54,7 +48,7 @@ export function useReadMyCities() {
   const setUserLocation = () => {
     const HolonCoords=[32.0193121, 34.7804076];
   
-  
+ 
     if (!("geolocation" in navigator)) {
         setCurrentLocation(HolonCoords)
     }

@@ -14,7 +14,8 @@ export const citiesListSlice = createSlice({
       state.list.push(action.payload)
     },
     removeCity: (state,action) => {
-        state.list.push(action.payload)
+      let removed_index=state.list.findIndex(x=>x.lat===action.payload.lat)
+        state.list.splice(removed_index,1)
       },
   },
 })
