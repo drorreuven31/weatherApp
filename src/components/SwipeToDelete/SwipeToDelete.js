@@ -60,7 +60,6 @@ class SwipeToDelete extends React.Component {
     //check if its is a click
     const {onClick} =this.props;
     if(this.state.translate===0&&this.startTouchPosition===cursorPosition(e)){
-      debugger;
       onClick();
     }
     this.startTouchPosition = null;

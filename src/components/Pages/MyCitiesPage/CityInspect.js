@@ -12,7 +12,7 @@ import keywords from "../../../services/translationTexts";
 import SwipeToDelete from "../../SwipeToDelete/SwipeToDelete";
 const CityInspect = ({ lat, lon, local_names,isMyLocation,onClick,onDelete }) => {
   const [forecast, setforecast] = useState();
-
+  const [currentTime, setcurrentTime] = useState(new Date())
   const lang = useSelector((state) => state.settings.lang);
   const temp = useSelector((state) => state.settings.temp);
 
@@ -24,6 +24,18 @@ const CityInspect = ({ lat, lon, local_names,isMyLocation,onClick,onDelete }) =>
     if (lat && lon) fetchForecast();
 
   }, [lat, lon,lang,temp]);
+
+  useEffect(() => {
+    const timer = setInterval(() => { // Creates an interval which will update the current data every minute
+    // This will trigger a rerender every component that uses the useDate hook.
+    setcurrentTime(new Date());
+  }, 60 * 1000);
+  return () => {
+    clearInterval(timer); // Return a funtion to clear the timer so that it will stop being called on unmount
+  }
+}, []);
+  
+
 
   const getPageBg=()=>{
     const bgImage= getThemeData(forecast.current.weather[0].main,getWeatherTime(forecast.current.weather[0].icon)).bgImage;
@@ -41,7 +53,7 @@ const CityInspect = ({ lat, lon, local_names,isMyLocation,onClick,onDelete }) =>
       ?
       local_names[lang.id]
       :
-      dateFormat(unixToDateTime(calcLocalTime(forecast.current.dt,forecast.timezone_offset)),"HH:MM")
+      dateFormat(unixToDateTime(calcLocalTime(Math.floor(currentTime.getTime()/1000),forecast.timezone_offset)),"HH:MM")
     
     }</div>
     <div className="weather-description">{forecast.current.weather[0].description}</div>

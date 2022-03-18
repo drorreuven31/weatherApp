@@ -76,7 +76,7 @@ const CityForecastPage = ({ cityinfo,cityIndex ,currentIndex}) => {
 
   const createSmallDataBoxes = () => [
     <SmallInfoBox boxDescription={<><AirIcon style={getLeftRightTextMargin(lang,'.3rem')}/> <h6>{keywords['wind'][lang.id]}</h6></>} key={1}>
-      {forecast.current.wind_speed} {keywords['km_h'][lang.id]}
+      {forecast.current.wind_speed*(temp=="f"?1:3.6)} {keywords['speedUnit'][temp][lang.id]}
     </SmallInfoBox>,
     <SmallInfoBox boxDescription={<><TempIcon style={getLeftRightTextMargin(lang,'.3rem')}/> <h6>{keywords['feels_like'][lang.id]}</h6></>} key={2}>
       {Math.round(forecast.current.feels_like)}°

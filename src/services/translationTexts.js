@@ -15,9 +15,14 @@
     visibility:{en:'Visibility',he:"ראות"},
     humidity:{en:'Humidity',he:"לחות"},
     pressure:{en:'Pressure',he:"לחץ"},
+
     km:{en:'Km',he:'ק"מ'},
     km_h:{en:'Km/h',he:'קמ"ש'},
     mb:{en:'Mb',he:'מ"ב'},
+    speedUnit:{
+        c:{en:'Km/h',he:'קמ"ש'},
+        f:{en:'m/h',he:'מייל/שעה'}
+    },
     my_location:{en:'My Location',he:'המיקום שלי'},
     weather:{en:'Weather',he:'מזג אוויר'},
     search_city:{en:'Search City',he:'חפש עיר'},
