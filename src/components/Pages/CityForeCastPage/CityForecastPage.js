@@ -36,7 +36,7 @@ const CityForecastPage = ({ cityinfo,cityIndex ,currentIndex}) => {
   const temp = useSelector((state) => state.settings.temp )
   const {setTheme} = useContext(ThemeContext);
 
-
+  console.log('render!');
   async function fetchWeatherInfo() {
     const _forcast = await getLocationWeatherInfo(lat, lon,temp,lang.id);
     setForecast(_forcast);
@@ -123,6 +123,7 @@ const CityForecastPage = ({ cityinfo,cityIndex ,currentIndex}) => {
           </CurrentTempertureContext.Provider>
           <div className='smallBoxesContainer'>
             {fillChunkedList(_.chunk(createSmallDataBoxes(), columnNumber)).map(
+              
               (row, i) => {
                 return (
                   <div key={i} className='boxesRow'>

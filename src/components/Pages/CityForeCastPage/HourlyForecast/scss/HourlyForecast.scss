@@ -5,7 +5,7 @@
  display: flex;
  flex-direction: row;
  overflow-y: hidden;
- overflow-x: scroll; /* Must be 'scroll' not 'auto' */
+ overflow-x: auto; /* Must be 'scroll' not 'auto' */
  -webkit-overflow-scrolling: touch;
 
 ::-webkit-scrollbar {
