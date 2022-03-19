@@ -1,5 +1,5 @@
 $flex-direction: row;
-
+$pc-screen: 700px;
 .DayData {
   display: flex;
   justify-content: space-around;
@@ -8,9 +8,17 @@ $flex-direction: row;
   flex-direction: $flex-direction;
   img {
     
-    max-width: 120%;
-    max-height: 120%;
+    max-width: 100%;
+    max-height: 100%;
   }
+ 
+@media (min-width: $pc-screen) {
+  img {
+    
+    max-width: 170%;
+    max-height: 170%;
+  }
+}
   .dayIcon {
     width: 10%;
   }

@@ -58,11 +58,20 @@ export function useReadMyCities() {
     navigator.geolocation.getCurrentPosition( position => {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
-      alert(lat+" "+lon)
+      
       setCurrentLocation([lat,lon])
     
     },
-    ()=>alert('failed to get location')
+    ()=>{
+      fetch("https://ipinfo.io/geo").then(res=>{
+        var loc = res.loc.split(',');
+        var coords = {
+            latitude: loc[0],
+            longitude: loc[1]
+        };
+        setCurrentLocation([coords.latitude,coords.longitude])
+      })
+    }
     )
     }
   }

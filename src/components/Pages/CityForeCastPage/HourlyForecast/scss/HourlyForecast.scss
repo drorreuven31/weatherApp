@@ -1,18 +1,15 @@
 
+.scroll-container{
+    flex-direction: row;
+}
 
 .houres_container{
  height: 80%;
  display: flex;
  flex-direction: row;
- overflow-y: hidden;
- overflow-x: auto; /* Must be 'scroll' not 'auto' */
- -webkit-overflow-scrolling: touch;
-
-::-webkit-scrollbar {
-    width: 0px;
-    background: transparent; /* make scrollbar transparent */
-}
-
+ //white-space: nowrap;
+ //overflow-y: hidden;
+ //overflow-x: scroll;
 }
 .HourlyForecast{
 
