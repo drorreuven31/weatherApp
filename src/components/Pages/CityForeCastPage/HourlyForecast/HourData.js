@@ -5,6 +5,7 @@ import propTypes from "prop-types";
 
 const HourData = ({ hour, temp, icon, isSunState }) => {
   return (
+    <div className="hour_wrapper">
     <div className="hour_item">
       <div className="hour">{hour}</div>
         
@@ -25,6 +26,7 @@ const HourData = ({ hour, temp, icon, isSunState }) => {
         {temp}
         {!isSunState && "°"}
       </div>
+    </div>
     </div>
   );
 };

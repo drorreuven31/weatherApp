@@ -104,12 +104,12 @@ const HourlyForecast = ({ current, hourly, daily, timezone_offset }) => {
             </>
           }
         >
-              <ScrollContainer className="scroll-container" vertical={false} hideScrollbars={true}>
-               <div className="houres_container" ref={scrollRef}>
+              {/* <ScrollContainer className="scroll-container" vertical={false} hideScrollbars={true}>
+              
+              </ScrollContainer> */}
+              <div className="houres_container" ref={scrollRef}>
                 {hourComponents()}
               </div>
-              </ScrollContainer>
-
               
        
         </MainInfoBox>

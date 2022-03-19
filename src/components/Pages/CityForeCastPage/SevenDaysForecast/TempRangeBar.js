@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { tempToColor } from 'temp-color';
 import './scss/TempRangeBar.scss'
 import useWindowSize from '../../../../hooks/useWindowSize';
+import { oppositeDirection } from '../../../../services/util';
 
 const TempRangeBar = ({min,max,isToday}) => {
     const WeekMinMaxTemp = useContext(WeekMinMaxTempContext);
@@ -47,7 +48,7 @@ const TempRangeBar = ({min,max,isToday}) => {
         let min_color =tempToColor(min,WeekMinMaxTemp.minTemp*0.8,WeekMinMaxTemp.maxTemp*1.2,);
         let max_color =tempToColor(max,WeekMinMaxTemp.minTemp*0.8,WeekMinMaxTemp.maxTemp*1.2);
        
-        let backgroundImage = `linear-gradient(to ${lang.dir}, rgb(${min_color.r},${min_color.g},${min_color.b}) , rgb(${max_color.r},${max_color.g},${max_color.b}))`
+        let backgroundImage = `linear-gradient(to ${oppositeDirection(lang.dir)}, rgb(${min_color.r},${min_color.g},${min_color.b}) , rgb(${max_color.r},${max_color.g},${max_color.b}))`
         
        
         let styles={width,
