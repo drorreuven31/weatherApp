@@ -1,15 +1,13 @@
 
-.scroll-container{
-    //flex-direction: row;
-}
 
 .houres_container{
  height: 80%;
  display: flex;
  flex-direction: row;
- //white-space: nowrap;
- //overflow-y: hidden;
- //overflow-x: scroll;
+ white-space: nowrap;
+ overflow-y: hidden;
+ overflow-x: scroll;
+ -webkit-overflow-scrolling: touch;
 }
 .HourlyForecast{
 
