@@ -1,5 +1,6 @@
 import { OPEN_WEATHER_API_KEY } from "./keys";
 import axios from "axios";
+import _ from "lodash"
 const GEO_CODING_BASEURL =
   "https://api.openweathermap.org/geo/1.0";
 
@@ -22,10 +23,11 @@ export async function getCitysInfoByName(cityname,current_lang) {
   if(!results.data)
     return []
   
-  let filteredResults =results.data.filter(res=>{
+    let filteredResults =  _.chain(results.data)
+  .filter(res=>{
    return res.local_names!==undefined?(current_lang in res.local_names ):false
-
-  })
+  }).uniqBy(['name','country'])
+  .value()
   
   return filteredResults;
   
