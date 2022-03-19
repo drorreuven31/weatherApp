@@ -24,4 +24,4 @@ export default function MoreButton() {
   );
 }
 
-const temps = [{id:"c",name:"Celsius"}, {id:"f",name:"Farenhite"}];
+const temps = [{id:"c",name:"Celsius"}, {id:"f",name:"Fahrenheit"}];
