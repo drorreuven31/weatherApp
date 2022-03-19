@@ -36,7 +36,7 @@ const CityForecastPage = ({ cityinfo,cityIndex ,currentIndex}) => {
   const temp = useSelector((state) => state.settings.temp )
   const {setTheme} = useContext(ThemeContext);
 
-
+  console.log('render!');
   async function fetchWeatherInfo() {
     const _forcast = await getLocationWeatherInfo(lat, lon,temp,lang.id);
     setForecast(_forcast);
@@ -76,7 +76,7 @@ const CityForecastPage = ({ cityinfo,cityIndex ,currentIndex}) => {
 
   const createSmallDataBoxes = () => [
     <SmallInfoBox boxDescription={<><AirIcon style={getLeftRightTextMargin(lang,'.3rem')}/> <h6>{keywords['wind'][lang.id]}</h6></>} key={1}>
-      {forecast.current.wind_speed*(temp=="f"?1:3.6)} {keywords['speedUnit'][temp][lang.id]}
+      {Math.round(forecast.current.wind_speed*(temp=="f"?1:3.6))} {keywords['speedUnit'][temp][lang.id]}
     </SmallInfoBox>,
     <SmallInfoBox boxDescription={<><TempIcon style={getLeftRightTextMargin(lang,'.3rem')}/> <h6>{keywords['feels_like'][lang.id]}</h6></>} key={2}>
       {Math.round(forecast.current.feels_like)}°
@@ -123,6 +123,7 @@ const CityForecastPage = ({ cityinfo,cityIndex ,currentIndex}) => {
           </CurrentTempertureContext.Provider>
           <div className='smallBoxesContainer'>
             {fillChunkedList(_.chunk(createSmallDataBoxes(), columnNumber)).map(
+              
               (row, i) => {
                 return (
                   <div key={i} className='boxesRow'>

@@ -11,20 +11,18 @@ function getWindowDimensions() {
 export default function useColumCalculator(startColumns=2) {
   
   const [columnNumber, setcolumnNumber] = useState(
-    Math.floor(getWindowDimensions().width / 220)
+    startColumns
   )
+
   useEffect(() => {
     function handleResize() {
-     
       let newColumnNumber = Math.floor(getWindowDimensions().width/250);
-      if (columnNumber !== newColumnNumber){
-        setcolumnNumber(newColumnNumber)
-      }
+      setcolumnNumber(prev=>newColumnNumber)
       
     }
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  return columnNumber
+  return columnNumber;
 }
