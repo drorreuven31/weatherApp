@@ -41,7 +41,7 @@ const MyCitiesPage = (props) => {
   };
 
   const handleRemoveCity = (cityinfo) => {
-    debugger;
+    
     //update the cookies
     let cookies_cities =citiesInfo.map((a) => Object.assign({}, a));
     cookies_cities = cookies_cities.filter((x) => !x.isMyLocation);
@@ -59,6 +59,71 @@ const MyCitiesPage = (props) => {
     
   };
 
+
+  const renderPage=()=>{
+    const showSearchList = searchBarText !== "" && searchBarFocused;
+
+    if(showSearchList){
+      const showResults=searchResults.length > 0;
+      if(showResults){
+        return(
+          <div className={`search-result-list ${lang.direction}-div text-${lang.dir}`}>
+            {searchResults.map((res) => {
+              let name = res.local_names[lang.id];
+              let bold = name.slice(0, searchBarText.length);
+              let regular = name.slice(searchBarText.length, name.length);
+              return (
+                <div
+                  className="search-result-item"
+                  key={res.lat}
+                  onClick={() => handleAddCity(res)}
+                >
+                  <span className="bold">{bold}</span>
+                  <span>
+                    {regular} , {res.country}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        )
+      }
+      else{
+        return(
+          <div className={`no-results ${lang.direction}-div`}>
+            <SearchOutlined/>
+             <h2>{keywords['no_results'][lang.id]}</h2>
+          <h5>{keywords['no_results_found'][lang.id]} "{searchBarText}".</h5>
+          </div>
+        )
+      }
+    }
+    else{
+      return(
+        <>
+          {citiesInfo && (
+            <div
+              className="city-inspect-list"
+              style={{ opacity: searchBarFocused ? "0.2" : "1" }}
+            >
+              {citiesInfo.map((c, i) => {
+                return (
+                  <CityInspect
+                    key={c.lat}
+                    {...c}
+                    onClick={() => navigate(`/city/${i}`)}
+                    onDelete={()=>handleRemoveCity(c)}
+                  />
+                );
+              })}
+            </div>
+          )}
+        </>
+      )
+    }
+  }
+
+
   return (
     <div
       className="CitiesPage-page-wrapper"
@@ -71,57 +136,7 @@ const MyCitiesPage = (props) => {
       />
 
       <div className="MyCitiesPage">
-        {searchBarText !== "" && searchBarFocused ? (
-          <>
-            {searchResults.length > 0 ? (
-              <div className={`search-result-list ${lang.direction}-div text-${lang.dir}`}>
-                {searchResults.map((res) => {
-                  let name = res.local_names[lang.id];
-                  let bold = name.slice(0, searchBarText.length);
-                  let regular = name.slice(searchBarText.length, name.length);
-                  return (
-                    <div
-                      className="search-result-item"
-                      key={res.lat}
-                      onClick={() => handleAddCity(res)}
-                    >
-                      <span className="bold">{bold}</span>
-                      <span>
-                        {regular} , {res.country}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              <div className={`no-results ${lang.direction}-div`}>
-                <SearchOutlined/>
-                 <h2>{keywords['no_results'][lang.id]}</h2>
-              <h5>{keywords['no_results_found'][lang.id]} "{searchBarText}".</h5>
-              </div>
-            )}
-          </>
-        ) : (
-          <>
-            {citiesInfo && (
-              <div
-                className="city-inspect-list"
-                style={{ opacity: searchBarFocused ? "0.2" : "1" }}
-              >
-                {citiesInfo.map((c, i) => {
-                  return (
-                    <CityInspect
-                      key={c.lat}
-                      {...c}
-                      onClick={() => navigate(`/city/${i}`)}
-                      onDelete={()=>handleRemoveCity(c)}
-                    />
-                  );
-                })}
-              </div>
-            )}
-          </>
-        )}
+          {renderPage()}
       </div>
     </div>
   );

@@ -10,6 +10,7 @@ import keywords from "../../../services/translationTexts";
 
 
 import SwipeToDelete from "../../SwipeToDelete/SwipeToDelete";
+import { Delete } from "@mui/icons-material";
 const CityInspect = ({ lat, lon, local_names,isMyLocation,onClick,onDelete }) => {
   const [forecast, setforecast] = useState();
   const [currentTime, setcurrentTime] = useState(new Date())
@@ -73,7 +74,7 @@ const CityInspect = ({ lat, lon, local_names,isMyLocation,onClick,onDelete }) =>
     {forecast&&(
       <>
       {!isMyLocation?(
-        <SwipeToDelete rtl={lang.direction==="rtl"} onClick={onClick} onDelete={onDelete} >
+        <SwipeToDelete rtl={lang.direction==="rtl"} onClick={onClick} onDelete={onDelete} deleteComponent={<Delete/>}>
           {swipeContent()}
         </SwipeToDelete>):
         <div onClick={onClick} style={{marginBottom:'.5rem'}}>
