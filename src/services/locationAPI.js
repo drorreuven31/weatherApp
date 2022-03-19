@@ -1,7 +1,7 @@
 import { OPEN_WEATHER_API_KEY } from "./keys";
 import axios from "axios";
 const GEO_CODING_BASEURL =
-  "http://api.openweathermap.org/geo/1.0";
+  "https://api.openweathermap.org/geo/1.0";
 
 
 const LocationAxios = axios.create({
