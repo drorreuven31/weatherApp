@@ -58,9 +58,12 @@ export function useReadMyCities() {
     navigator.geolocation.getCurrentPosition( position => {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
+      alert(lat+" "+lon)
       setCurrentLocation([lat,lon])
     
-    })
+    },
+    ()=>alert('failed to get location')
+    )
     }
   }
 
