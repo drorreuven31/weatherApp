@@ -63,7 +63,9 @@ export function useReadMyCities() {
     
     },
     ()=>{
+      alert("hey")
       fetch("https://ipinfo.io/geo").then(res=>{
+        alert(res)
         var loc = res.loc.split(',');
         var coords = {
             latitude: loc[0],
