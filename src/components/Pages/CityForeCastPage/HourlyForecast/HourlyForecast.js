@@ -11,6 +11,8 @@ import {
   unixToDateTime,
 } from "../../../../services/util";
 
+
+
 import dateFormat from "dateformat";
 import _ from "lodash";
 import { ReactComponent as SunrizeIcon } from "../../../../resources/icons/sunrise.svg";
@@ -24,6 +26,10 @@ const HourlyForecast = ({ current, hourly, daily, timezone_offset }) => {
   const scrollRef = useHorizontalScroll();
   const [hoursObjects, sethoursObjects] = useState(hourly);
   const lang = useSelector((state) => state.settings.lang);
+  //const scrollContainer = useRef()
+
+ 
+ 
 
   const sunStateObjects = () => {
     let dt = Date.now() / 1000;
@@ -104,9 +110,6 @@ const HourlyForecast = ({ current, hourly, daily, timezone_offset }) => {
             </>
           }
         >
-              {/* <ScrollContainer className="scroll-container" vertical={false} hideScrollbars={true}>
-              
-              </ScrollContainer> */}
               <div className="houres_container" ref={scrollRef}>
                 {hourComponents()}
               </div>

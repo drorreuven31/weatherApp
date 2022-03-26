@@ -36,7 +36,7 @@ const CityForecastPage = ({ cityinfo,cityIndex ,currentIndex}) => {
   const temp = useSelector((state) => state.settings.temp )
   const {setTheme} = useContext(ThemeContext);
 
-  console.log('render!');
+  
   async function fetchWeatherInfo() {
     const _forcast = await getLocationWeatherInfo(lat, lon,temp,lang.id);
     setForecast(_forcast);
@@ -49,12 +49,12 @@ const CityForecastPage = ({ cityinfo,cityIndex ,currentIndex}) => {
      fetchWeatherInfo().catch()
   }, [lat, lon,lang,temp])
   
-  //for updating every minute
+  //for updating every 5 minute
   useEffect(() => {
     const refreshInterval = setInterval(() => {
-      
-      //fetchWeatherInfo().catch();
-    },1*1000);
+     
+      fetchWeatherInfo().catch();
+    },300*1000);
   
     return () => {
       clearInterval(refreshInterval);
