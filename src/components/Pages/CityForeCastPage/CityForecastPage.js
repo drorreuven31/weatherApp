@@ -96,7 +96,7 @@ const CityForecastPage = ({ cityinfo,cityIndex ,currentIndex}) => {
   ]
   
   const getPageBg=()=>{
-    return getThemeData(forecast.current.weather[0].main,"day").bgImage;
+    return getThemeData(forecast.current.weather[0].main,getWeatherTime(forecast.current.weather[0].icon)).bgImage;
   }
 
   return (
