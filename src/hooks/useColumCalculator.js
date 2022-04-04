@@ -17,6 +17,7 @@ export default function useColumCalculator(startColumns=2) {
   useEffect(() => {
     function handleResize() {
       let newColumnNumber = Math.floor(getWindowDimensions().width/200);
+      
       if(newColumnNumber==0)
         newColumnNumber=1;
         
